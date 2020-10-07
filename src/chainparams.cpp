@@ -80,9 +80,13 @@ public:
         assert(hashGenesisBlock == uint256("0x2ce9a9e271caa8fc164d29ea497f60f0a0f6a05998db2430bc5003da148b6699"));
         assert(genesis.hashMerkleRoot == uint256("0x84346f5d939fa8c9d3548f3c3f31ef29f1b7972a43878453d3a5a4c176836459"));
 
-        vSeeds.push_back(CDNSSeedData("seed1.dimi.net","51.75.162.95"));   // Connection Main 1 
-	vSeeds.push_back(CDNSSeedData("seed2.dimi.net","51.38.71.12"));    // Connection Main 2
-	vSeeds.push_back(CDNSSeedData("seed3.dimi.net","167.86.94.93"));    // Connection Main 3
+	vSeeds.push_back(CDNSSeedData("95.111.247.164","95.111.247.164"));     // New seed node 1
+	vSeeds.push_back(CDNSSeedData("207.180.216.126","207.180.216.126"));   // New seed node 2
+	vSeeds.push_back(CDNSSeedData("207.180.208.187","207.180.208.187"));   // New seed node 3
+	vSeeds.push_back(CDNSSeedData("78.57.248.53","78.57.248.53"));         // New seed node 4
+        vSeeds.push_back(CDNSSeedData("seed1.dimi.net","51.75.162.95"));       // Old seed node 1 
+	vSeeds.push_back(CDNSSeedData("seed2.dimi.net","51.38.71.12"));        // Old seed node 2
+	vSeeds.push_back(CDNSSeedData("seed3.dimi.net","167.86.94.93"));       // Old seed node 3
       
        
 	base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 32);
