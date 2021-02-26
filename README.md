@@ -16,7 +16,7 @@
 ## Coinbase Mining Maturity : 75 Blocks
 ## Coinbase Wallet Send Maturity : 10 Blocks
 ## Min Tx fee 0.00000250 : * This is to allow easier movement for miner pools * 
-## Premine : 5 % Premine ( NOT SELLING TO PUBLIC )
+## Premine : 5 % Premine ( DUMPED by original developer )
 ## Coin rewards :
 ## POW  
 ## Even 0.04 
