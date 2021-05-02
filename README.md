@@ -1,4 +1,4 @@
-![image](https://i.imgur.com/FqZU0oy.png)
+![image](https://github.com/MadCatMining/DiminutiveCoin/blob/main/logo.png)
 # Diminutivecoin
 
 ## Coin Name : Diminutive coin
