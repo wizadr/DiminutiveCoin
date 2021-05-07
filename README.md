@@ -1,4 +1,4 @@
-![image](https://i.imgur.com/FqZU0oy.png)
+![image](https://github.com/MadCatMining/DiminutiveCoin/blob/main/logo.png)
 # Diminutivecoin
 
 ## Coin Name : Diminutive coin
@@ -27,3 +27,4 @@
 ## odd 0.01
 ## Halving 1 000 000 BLOCKS
 # Total Coins produced 200 000
+
