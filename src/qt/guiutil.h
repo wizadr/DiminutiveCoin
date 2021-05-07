@@ -17,7 +17,7 @@ class QUrl;
 class QAbstractItemView;
 QT_END_NAMESPACE
 
-/** Utility functions used by the DiminutiveVaultCoin Qt UI.
+/** Utility functions used by the DiminutiveCoin Qt UI.
  */
 namespace GUIUtil
 {
@@ -25,17 +25,17 @@ namespace GUIUtil
     QString dateTimeStr(const QDateTime &datetime);
     QString dateTimeStr(qint64 nTime);
 
-    // Render DiminutiveVaultCoin addresses in monospace font
-    QFont diminutivevaultcoinAddressFont();
+    // Render DiminutiveCoin addresses in monospace font
+    QFont diminutivecoinAddressFont();
 
     // Set up widgets for address and amounts
     void setupAddressWidget(QLineEdit *widget, QWidget *parent);
     void setupAmountWidget(QLineEdit *widget, QWidget *parent);
 
-    // Parse "diminutivevaultcoin:" URI into recipient object, return true on successful parsing
-    // See DiminutiveVaultCoin URI definition discussion here: https://diminutivevaultcointalk.org/index.php?topic=33490.0
-    bool parseDiminutiveVaultCoinURI(const QUrl &uri, SendCoinsRecipient *out);
-    bool parseDiminutiveVaultCoinURI(QString uri, SendCoinsRecipient *out);
+    // Parse "diminutivecoin:" URI into recipient object, return true on successful parsing
+    // See Bitcoin (applies to DiminutiveCoin) URI definition discussion here: https://bitcointalk.org/index.php?topic=33490.0
+    bool parseDiminutiveCoinURI(const QUrl &uri, SendCoinsRecipient *out);
+    bool parseDiminutiveCoinURI(QString uri, SendCoinsRecipient *out);
 
     // HTML escaping for rich text controls
     QString HtmlEscape(const QString& str, bool fMultiLine=false);
@@ -75,7 +75,7 @@ namespace GUIUtil
 
     // Open debug.log
     void openDebugLogfile();
-    // Open diminutivevaultcoin.conf
+    // Open diminutivecoin.conf
     void openConfigfile();
     /** Qt event filter that intercepts ToolTipChange events, and replaces the tooltip with a rich text
       representation if needed. This assures that Qt can word-wrap long tooltip messages.
@@ -98,7 +98,7 @@ namespace GUIUtil
     bool GetStartOnSystemStartup();
     bool SetStartOnSystemStartup(bool fAutoStart);
 
-    /** Help message for DiminutiveVaultCoin-Qt, shown with --help. */
+    /** Help message for DiminutiveCoin-Qt, shown with --help. */
     class HelpMessageBox : public QMessageBox
     {
         Q_OBJECT

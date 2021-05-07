@@ -1,29 +1,28 @@
 * update translations (ping tcatm on IRC for now)
 
 * update (commit) version in sources
-  diminutivevaultcoin-qt.pro
+  diminutivecoin-qt.pro
   src/clientversion.h (change CLIENT_VERSION_IS_RELEASE to true)
   share/setup.nsi
   doc/README*
 
 * tag version in git
 
-   git tag -a v0.5.1
+   git tag -a v1.0.1.0
 
 * write release notes.  git shortlog helps a lot:
 
-   git shortlog --no-merges v0.5.0..
+   git shortlog --no-merges v1.0.1.0..
 
 * perform gitian builds
 
-  * From a directory containing the diminutivevaultcoin source, gitian-builder and gitian.sigs
+  * From a directory containing the diminutivecoin source, gitian-builder and gitian.sigs
    export SIGNER=(your gitian key, ie bluematt, sipa, etc)
-   export VERSION=0.5.1
+   export VERSION=1.0.1.0
    cd ./gitian-builder
 
   * Fetch and build inputs:
    mkdir -p inputs; cd inputs/
-   wget 'http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.6.tar.gz' -O miniupnpc-1.6.tar.gz
    wget 'http://www.openssl.org/source/openssl-1.0.1b.tar.gz'
    wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
    wget 'http://zlib.net/zlib-1.2.6.tar.gz'
@@ -32,73 +31,73 @@
    wget 'http://downloads.sourceforge.net/project/boost/boost/1.47.0/boost_1_47_0.tar.bz2'
    wget 'http://download.qt.nokia.com/qt/source/qt-everywhere-opensource-src-4.7.4.tar.gz'
    cd ..
-   ./bin/gbuild ../diminutivevaultcoin/contrib/gitian-descriptors/boost-win32.yml
+   ./bin/gbuild ../diminutivecoin/contrib/gitian-descriptors/boost-win32.yml
    cp build/out/boost-win32-1.47.0-gitian.zip inputs/
-   ./bin/gbuild ../diminutivevaultcoin/contrib/gitian-descriptors/qt-win32.yml
+   ./bin/gbuild ../diminutivecoin/contrib/gitian-descriptors/qt-win32.yml
    cp build/out/qt-win32-4.7.4-gitian.zip inputs/
-   ./bin/gbuild ../diminutivevaultcoin/contrib/gitian-descriptors/deps-win32.yml
-   cp build/out/diminutivevaultcoin-deps-0.0.3.zip inputs/
+   ./bin/gbuild ../diminutivecoin/contrib/gitian-descriptors/deps-win32.yml
+   cp build/out/diminutivecoin-deps-0.0.3.zip inputs/
 
-  * Build diminutivevaultcoind and diminutivevaultcoin-qt on Linux32, Linux64, and Win32:
-   ./bin/gbuild --commit diminutivevaultcoin=v${VERSION} ../diminutivevaultcoin/contrib/gitian-descriptors/gitian.yml
-   ./bin/gsign --signer $SIGNER --release ${VERSION} --destination ../gitian.sigs/ ../diminutivevaultcoin/contrib/gitian-descriptors/gitian.yml
+  * Build diminutivecoind and diminutivecoin-qt on Linux32, Linux64, and Win32:
+   ./bin/gbuild --commit diminutivecoin=v${VERSION} ../diminutivecoin/contrib/gitian-descriptors/gitian.yml
+   ./bin/gsign --signer $SIGNER --release ${VERSION} --destination ../gitian.sigs/ ../diminutivecoin/contrib/gitian-descriptors/gitian.yml
    pushd build/out
-   zip -r diminutivevaultcoin-${VERSION}-linux-gitian.zip *
-   mv diminutivevaultcoin-${VERSION}-linux-gitian.zip ../../
+   zip -r diminutivecoin-${VERSION}-linux-gitian.zip *
+   mv diminutivecoin-${VERSION}-linux-gitian.zip ../../
    popd
-   ./bin/gbuild --commit diminutivevaultcoin=v${VERSION} ../diminutivevaultcoin/contrib/gitian-descriptors/gitian-win32.yml
-   ./bin/gsign --signer $SIGNER --release ${VERSION}-win32 --destination ../gitian.sigs/ ../diminutivevaultcoin/contrib/gitian-descriptors/gitian-win32.yml
+   ./bin/gbuild --commit diminutivecoin=v${VERSION} ../diminutivecoin/contrib/gitian-descriptors/gitian-win32.yml
+   ./bin/gsign --signer $SIGNER --release ${VERSION}-win32 --destination ../gitian.sigs/ ../diminutivecoin/contrib/gitian-descriptors/gitian-win32.yml
    pushd build/out
-   zip -r diminutivevaultcoin-${VERSION}-win32-gitian.zip *
-   mv diminutivevaultcoin-${VERSION}-win32-gitian.zip ../../
+   zip -r diminutivecoin-${VERSION}-win32-gitian.zip *
+   mv diminutivecoin-${VERSION}-win32-gitian.zip ../../
    popd
 
   Build output expected:
-  1. linux 32-bit and 64-bit binaries + source (diminutivevaultcoin-${VERSION}-linux-gitian.zip)
-  2. windows 32-bit binary, installer + source (diminutivevaultcoin-${VERSION}-win32-gitian.zip)
+  1. linux 32-bit and 64-bit binaries + source (diminutivecoin-${VERSION}-linux-gitian.zip)
+  2. windows 32-bit binary, installer + source (diminutivecoin-${VERSION}-win32-gitian.zip)
   3. Gitian signatures (in gitian.sigs/${VERSION}[-win32]/(your gitian key)/
 
 * repackage gitian builds for release as stand-alone zip/tar/installer exe
 
   * Linux .tar.gz:
-   unzip diminutivevaultcoin-${VERSION}-linux-gitian.zip -d diminutivevaultcoin-${VERSION}-linux
-   tar czvf diminutivevaultcoin-${VERSION}-linux.tar.gz diminutivevaultcoin-${VERSION}-linux
-   rm -rf diminutivevaultcoin-${VERSION}-linux
+   unzip diminutivecoin-${VERSION}-linux-gitian.zip -d diminutivecoin-${VERSION}-linux
+   tar czvf diminutivecoin-${VERSION}-linux.tar.gz diminutivecoin-${VERSION}-linux
+   rm -rf diminutivecoin-${VERSION}-linux
 
   * Windows .zip and setup.exe:
-   unzip diminutivevaultcoin-${VERSION}-win32-gitian.zip -d diminutivevaultcoin-${VERSION}-win32
-   mv diminutivevaultcoin-${VERSION}-win32/diminutivevaultcoin-*-setup.exe .
-   zip -r diminutivevaultcoin-${VERSION}-win32.zip diminutivevaultcoin-${VERSION}-win32
-   rm -rf diminutivevaultcoin-${VERSION}-win32
+   unzip diminutivecoin-${VERSION}-win32-gitian.zip -d diminutivecoin-${VERSION}-win32
+   mv diminutivecoin-${VERSION}-win32/diminutivecoin-*-setup.exe .
+   zip -r diminutivecoin-${VERSION}-win32.zip diminutivecoin-${VERSION}-win32
+   rm -rf diminutivecoin-${VERSION}-win32
 
 * perform Mac build
   See this blog post for how Gavin set up his build environment to build the OSX
   release; note that a patched version of macdeployqt is not needed anymore, as
   the required functionality and fixes are implemented directly in macdeployqtplus:
-    http://gavintech.blogspot.com/2011/11/deploying-diminutivevaultcoin-qt-on-osx.html
+    http://gavintech.blogspot.com/2011/11/deploying-diminutivecoin-qt-on-osx.html
   Gavin also had trouble with the macports py27-appscript package; he
   ended up installing a version that worked with: /usr/bin/easy_install-2.7 appscript
 
-  qmake RELEASE=1 USE_UPNP=1 USE_QRCODE=1 diminutivevaultcoin-qt.pro
+  qmake RELEASE=1 USE_QRCODE=1 diminutivecoin-qt.pro
   make
   export QTDIR=/opt/local/share/qt4  # needed to find translations/qt_*.qm files
   T=$(contrib/qt_translations.py $QTDIR/translations src/qt/locale)
-  python2.7 contrib/macdeploy/macdeployqtplus DiminutiveVaultCoin-Qt.app -add-qt-tr $T -dmg -fancy contrib/macdeploy/fancy.plist
+  python2.7 contrib/macdeploy/macdeployqtplus DiminutiveCoin-Qt.app -add-qt-tr $T -dmg -fancy contrib/macdeploy/fancy.plist
 
  Build output expected:
-  DiminutiveVaultCoin-Qt.dmg
+  DiminutiveCoin-Qt.dmg
 
 * upload builds to SourceForge
 
 * create SHA256SUMS for builds, and PGP-sign it
 
-* update diminutivevaultcoin.org version
+* update "https://diminutivecoin.com/wallet/" version
 
 * update forum version
 
-* update wiki download links
+* update "https://diminutivecoin.com/wallet/" download links
 
-* update wiki changelog: https://en.diminutivevaultcoin.it/wiki/Changelog
+* update changelog: https://diminutivecoin.com/useful-links/
 
 * Commit your signature to gitian.sigs:
   pushd gitian.sigs
@@ -112,31 +111,31 @@
 
 * After 3 or more people have gitian-built, repackage gitian-signed zips:
 
-  * From a directory containing diminutivevaultcoin source, gitian.sigs and gitian zips
-   export VERSION=0.5.1
-   mkdir diminutivevaultcoin-${VERSION}-linux-gitian
-   pushd diminutivevaultcoin-${VERSION}-linux-gitian
-   unzip ../diminutivevaultcoin-${VERSION}-linux-gitian.zip
+  * From a directory containing diminutivecoin source, gitian.sigs and gitian zips
+   export VERSION=1.0.1.0
+   mkdir diminutivecoin-${VERSION}-linux-gitian
+   pushd diminutivecoin-${VERSION}-linux-gitian
+   unzip ../diminutivecoin-${VERSION}-linux-gitian.zip
    mkdir gitian
-   cp ../diminutivevaultcoin/contrib/gitian-downloader/*.pgp ./gitian/
+   cp ../diminutivecoin/contrib/gitian-downloader/*.pgp ./gitian/
    for signer in $(ls ../gitian.sigs/${VERSION}/); do
-     cp ../gitian.sigs/${VERSION}/${signer}/diminutivevaultcoin-build.assert ./gitian/${signer}-build.assert
-     cp ../gitian.sigs/${VERSION}/${signer}/diminutivevaultcoin-build.assert.sig ./gitian/${signer}-build.assert.sig
+     cp ../gitian.sigs/${VERSION}/${signer}/diminutivecoin-build.assert ./gitian/${signer}-build.assert
+     cp ../gitian.sigs/${VERSION}/${signer}/diminutivecoin-build.assert.sig ./gitian/${signer}-build.assert.sig
    done
-   zip -r diminutivevaultcoin-${VERSION}-linux-gitian.zip *
-   cp diminutivevaultcoin-${VERSION}-linux-gitian.zip ../
+   zip -r diminutivecoin-${VERSION}-linux-gitian.zip *
+   cp diminutivecoin-${VERSION}-linux-gitian.zip ../
    popd
-   mkdir diminutivevaultcoin-${VERSION}-win32-gitian
-   pushd diminutivevaultcoin-${VERSION}-win32-gitian
-   unzip ../diminutivevaultcoin-${VERSION}-win32-gitian.zip
+   mkdir diminutivecoin-${VERSION}-win32-gitian
+   pushd diminutivecoin-${VERSION}-win32-gitian
+   unzip ../diminutivecoin-${VERSION}-win32-gitian.zip
    mkdir gitian
-   cp ../diminutivevaultcoin/contrib/gitian-downloader/*.pgp ./gitian/
+   cp ../diminutivecoin/contrib/gitian-downloader/*.pgp ./gitian/
    for signer in $(ls ../gitian.sigs/${VERSION}-win32/); do
-     cp ../gitian.sigs/${VERSION}-win32/${signer}/diminutivevaultcoin-build.assert ./gitian/${signer}-build.assert
-     cp ../gitian.sigs/${VERSION}-win32/${signer}/diminutivevaultcoin-build.assert.sig ./gitian/${signer}-build.assert.sig
+     cp ../gitian.sigs/${VERSION}-win32/${signer}/diminutivecoin-build.assert ./gitian/${signer}-build.assert
+     cp ../gitian.sigs/${VERSION}-win32/${signer}/diminutivecoin-build.assert.sig ./gitian/${signer}-build.assert.sig
    done
-   zip -r diminutivevaultcoin-${VERSION}-win32-gitian.zip *
-   cp diminutivevaultcoin-${VERSION}-win32-gitian.zip ../
+   zip -r diminutivecoin-${VERSION}-win32-gitian.zip *
+   cp diminutivecoin-${VERSION}-win32-gitian.zip ../
    popd
 
   * Upload gitian zips to SourceForge

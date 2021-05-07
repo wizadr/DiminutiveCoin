@@ -107,7 +107,7 @@ Value importprivkey(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 3)
         throw runtime_error(
-            "importprivkey <diminutivevaultcoinprivkey> [label] [rescan=true]\n"
+            "importprivkey <diminutivecoinprivkey> [label] [rescan=true]\n"
             "Adds a private key (as returned by dumpprivkey) to your wallet.");
 
     string strSecret = params[0].get_str();
@@ -120,7 +120,7 @@ Value importprivkey(const Array& params, bool fHelp)
     if (params.size() > 2)
         fRescan = params[2].get_bool();
 
-    CDiminutiveVaultCoinSecret vchSecret;
+    CDiminutiveCoinSecret vchSecret;
     bool fGood = vchSecret.SetString(strSecret);
 
     if (!fGood) throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key");
@@ -185,14 +185,14 @@ Value importwallet(const Array& params, bool fHelp)
         boost::split(vstr, line, boost::is_any_of(" "));
         if (vstr.size() < 2)
             continue;
-        CDiminutiveVaultCoinSecret vchSecret;
+        CDiminutiveCoinSecret vchSecret;
         if (!vchSecret.SetString(vstr[0]))
             continue;
         CKey key = vchSecret.GetKey();
         CPubKey pubkey = key.GetPubKey();
         CKeyID keyid = pubkey.GetID();
         if (pwalletMain->HaveKey(keyid)) {
-            LogPrintf("Skipping import of %s (key already present)\n", CDiminutiveVaultCoinAddress(keyid).ToString());
+            LogPrintf("Skipping import of %s (key already present)\n", CDiminutiveCoinAddress(keyid).ToString());
             continue;
         }
         int64_t nTime = DecodeDumpTime(vstr[1]);
@@ -210,7 +210,7 @@ Value importwallet(const Array& params, bool fHelp)
                 fLabel = true;
             }
         }
-        LogPrintf("Importing %s...\n", CDiminutiveVaultCoinAddress(keyid).ToString());
+        LogPrintf("Importing %s...\n", CDiminutiveCoinAddress(keyid).ToString());
         if (!pwalletMain->AddKey(key)) {
             fGood = false;
             continue;
@@ -245,15 +245,15 @@ Value dumpprivkey(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "dumpprivkey <diminutivevaultcoinaddress>\n"
-            "Reveals the private key corresponding to <diminutivevaultcoinaddress>.");
+            "dumpprivkey <diminutivecoinaddress>\n"
+            "Reveals the private key corresponding to <diminutivecoinaddress>.");
 
     EnsureWalletIsUnlocked();
 
     string strAddress = params[0].get_str();
-    CDiminutiveVaultCoinAddress address;
+    CDiminutiveCoinAddress address;
     if (!address.SetString(strAddress))
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid DiminutiveVaultCoin address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid DiminutiveCoin address");
     if (fWalletUnlockStakingOnly)
         throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Wallet is unlocked for staking only.");
     CKeyID keyID;
@@ -262,7 +262,7 @@ Value dumpprivkey(const Array& params, bool fHelp)
     CKey vchSecret;
     if (!pwalletMain->GetKey(keyID, vchSecret))
         throw JSONRPCError(RPC_WALLET_ERROR, "Private key for address " + strAddress + " is not known");
-    return CDiminutiveVaultCoinSecret(vchSecret).ToString();
+    return CDiminutiveCoinSecret(vchSecret).ToString();
 }
 
 Value dumpwallet(const Array& params, bool fHelp)
@@ -296,7 +296,7 @@ Value dumpwallet(const Array& params, bool fHelp)
     std::sort(vKeyBirth.begin(), vKeyBirth.end());
 
     // produce output
-    file << strprintf("# Wallet dump created by DiminutiveVaultCoin %s (%s)\n", CLIENT_BUILD, CLIENT_DATE);
+    file << strprintf("# Wallet dump created by DiminutiveCoin %s (%s)\n", CLIENT_BUILD, CLIENT_DATE);
     file << strprintf("# * Created on %s\n", EncodeDumpTime(GetTime()));
     file << strprintf("# * Best block at time of backup was %i (%s),\n", nBestHeight, hashBestChain.ToString());
     file << strprintf("#   mined on %s\n", EncodeDumpTime(pindexBest->nTime));
@@ -304,16 +304,16 @@ Value dumpwallet(const Array& params, bool fHelp)
     for (std::vector<std::pair<int64_t, CKeyID> >::const_iterator it = vKeyBirth.begin(); it != vKeyBirth.end(); it++) {
         const CKeyID &keyid = it->second;
         std::string strTime = EncodeDumpTime(it->first);
-        std::string strAddr = CDiminutiveVaultCoinAddress(keyid).ToString();
+        std::string strAddr = CDiminutiveCoinAddress(keyid).ToString();
 
         CKey key;
         if (pwalletMain->GetKey(keyid, key)) {
             if (pwalletMain->mapAddressBook.count(keyid)) {
-                file << strprintf("%s %s label=%s # addr=%s\n", CDiminutiveVaultCoinSecret(key).ToString(), strTime, EncodeDumpString(pwalletMain->mapAddressBook[keyid]), strAddr);
+                file << strprintf("%s %s label=%s # addr=%s\n", CDiminutiveCoinSecret(key).ToString(), strTime, EncodeDumpString(pwalletMain->mapAddressBook[keyid]), strAddr);
             } else if (setKeyPool.count(keyid)) {
-                file << strprintf("%s %s reserve=1 # addr=%s\n", CDiminutiveVaultCoinSecret(key).ToString(), strTime, strAddr);
+                file << strprintf("%s %s reserve=1 # addr=%s\n", CDiminutiveCoinSecret(key).ToString(), strTime, strAddr);
             } else {
-                file << strprintf("%s %s change=1 # addr=%s\n", CDiminutiveVaultCoinSecret(key).ToString(), strTime, strAddr);
+                file << strprintf("%s %s change=1 # addr=%s\n", CDiminutiveCoinSecret(key).ToString(), strTime, strAddr);
             }
         }
     }

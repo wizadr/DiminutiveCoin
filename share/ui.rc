@@ -1,4 +1,4 @@
-diminutivevaultcoin               ICON    "pixmaps/diminutivevaultcoin.ico"
+diminutivecoin               ICON    "pixmaps/diminutivecoin.ico"
 
 #include "wx/msw/wx.rc"
 

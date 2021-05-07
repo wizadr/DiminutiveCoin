@@ -204,10 +204,10 @@ Value stop(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "Stop DiminutiveVaultCoin server.");
+            "Stop DiminutiveCoin server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "DiminutiveVaultCoin server stopping";
+    return "DiminutiveCoin server stopping";
 }
 
 

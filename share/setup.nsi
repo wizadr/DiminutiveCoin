@@ -1,16 +1,16 @@
-Name DiminutiveVaultCoin
+Name DiminutiveCoin
 
 RequestExecutionLevel highest
 SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 1.1.0.0
-!define COMPANY "DiminutiveVaultCoin project"
-!define URL http://cryptocollectibles.io/
+!define VERSION 1.0.1.0
+!define COMPANY "DiminutiveCoin project"
+!define URL http://diminutivecoin.com/
 
 # MUI Symbol Definitions
-!define MUI_ICON "../share/pixmaps/diminutivevaultcoin.ico"
+!define MUI_ICON "../share/pixmaps/diminutivecoin.ico"
 !define MUI_WELCOMEFINISHPAGE_BITMAP "../share/pixmaps/nsis-wizard.bmp"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
@@ -19,8 +19,8 @@ SetCompressor /SOLID lzma
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
-!define MUI_STARTMENUPAGE_DEFAULTFOLDER DiminutiveVaultCoin
-#!define MUI_FINISHPAGE_RUN $INSTDIR\diminutivevaultcoin-qt.exe
+!define MUI_STARTMENUPAGE_DEFAULTFOLDER DiminutiveCoin
+#!define MUI_FINISHPAGE_RUN $INSTDIR\diminutivecoin-qt.exe
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
 !define MUI_UNWELCOMEFINISHPAGE_BITMAP "../share/pixmaps/nsis-wizard.bmp"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
@@ -45,14 +45,14 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile diminutivevaultcoin-0.3.0-win32-setup.exe
-InstallDir $PROGRAMFILES\DiminutiveVaultCoin
+OutFile diminutivecoin-1.0.1.0-win32-setup.exe
+InstallDir $PROGRAMFILES\DiminutiveCoin
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 1.0.0.0
-VIAddVersionKey ProductName DiminutiveVaultCoin
+VIProductVersion 1.0.1.0
+VIAddVersionKey ProductName DiminutiveCoin
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
 VIAddVersionKey CompanyWebsite "${URL}"
@@ -66,18 +66,18 @@ ShowUninstDetails show
 Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
-    #File ../release/diminutivevaultcoin-qt.exe
+    #File ../release/diminutivecoin-qt.exe
     File /oname=license.txt ../COPYING
     File /oname=readme.txt ../doc/README_windows.txt
     SetOutPath $INSTDIR\daemon
-    File ../src/diminutivevaultcoind.exe
+    File ../src/diminutivecoind.exe
     SetOutPath $INSTDIR\src
     File /r /x *.exe /x *.o ../src\*.*
     SetOutPath $INSTDIR
     WriteRegStr HKCU "${REGKEY}\Components" Main 1
 
-    # Remove old wxwidgets-based-diminutivevaultcoin executable and locales:
-    #Delete /REBOOTOK $INSTDIR\diminutivevaultcoin.exe
+    # Remove old wxwidgets-based-diminutivecoin executable and locales:
+    #Delete /REBOOTOK $INSTDIR\diminutivecoin.exe
     #RMDir /r /REBOOTOK $INSTDIR\locale
 SectionEnd
 
@@ -87,7 +87,7 @@ Section -post SEC0001
     WriteUninstaller $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateDirectory $SMPROGRAMS\$StartMenuGroup
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall DiminutiveVaultCoin.lnk" $INSTDIR\uninstall.exe
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall DiminutiveCoin.lnk" $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_END
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayName "$(^Name)"
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayVersion "${VERSION}"
@@ -98,11 +98,11 @@ Section -post SEC0001
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoModify 1
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoRepair 1
 
-    # diminutivevaultcoin: URI handling disabled for 0.6.0
-    #    WriteRegStr HKCR "diminutivevaultcoin" "URL Protocol" ""
-    #    WriteRegStr HKCR "diminutivevaultcoin" "" "URL:DiminutiveVaultCoin"
-    #    WriteRegStr HKCR "diminutivevaultcoin\DefaultIcon" "" $INSTDIR\diminutivevaultcoin-qt.exe
-    #    WriteRegStr HKCR "diminutivevaultcoin\shell\open\command" "" '"$INSTDIR\diminutivevaultcoin-qt.exe" "$$1"'
+    # diminutivecoin: URI handling disabled for 0.6.0
+    #    WriteRegStr HKCR "diminutivecoin" "URL Protocol" ""
+    #    WriteRegStr HKCR "diminutivecoin" "" "URL:DiminutiveCoin"
+    #    WriteRegStr HKCR "diminutivecoin\DefaultIcon" "" $INSTDIR\diminutivecoin-qt.exe
+    #    WriteRegStr HKCR "diminutivecoin\shell\open\command" "" '"$INSTDIR\diminutivecoin-qt.exe" "$$1"'
 SectionEnd
 
 # Macro for selecting uninstaller sections
@@ -120,7 +120,7 @@ done${UNSECTION_ID}:
 
 # Uninstaller sections
 Section /o -un.Main UNSEC0000
-    #Delete /REBOOTOK $INSTDIR\diminutivevaultcoin-qt.exe
+    #Delete /REBOOTOK $INSTDIR\diminutivecoin-qt.exe
     Delete /REBOOTOK $INSTDIR\license.txt
     Delete /REBOOTOK $INSTDIR\readme.txt
     RMDir /r /REBOOTOK $INSTDIR\daemon
@@ -130,9 +130,9 @@ SectionEnd
 
 Section -un.post UNSEC0001
     DeleteRegKey HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)"
-    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall DiminutiveVaultCoin.lnk"
-    #Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\DiminutiveVaultCoin.lnk"
-    #Delete /REBOOTOK "$SMSTARTUP\DiminutiveVaultCoin.lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall DiminutiveCoin.lnk"
+    #Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\DiminutiveCoin.lnk"
+    #Delete /REBOOTOK "$SMSTARTUP\DiminutiveCoin.lnk"
     Delete /REBOOTOK $INSTDIR\uninstall.exe
     Delete /REBOOTOK $INSTDIR\debug.log
     Delete /REBOOTOK $INSTDIR\db.log
@@ -140,7 +140,7 @@ Section -un.post UNSEC0001
     DeleteRegValue HKCU "${REGKEY}" Path
     DeleteRegKey /IfEmpty HKCU "${REGKEY}\Components"
     DeleteRegKey /IfEmpty HKCU "${REGKEY}"
-    DeleteRegKey HKCR "diminutivevaultcoin"
+    DeleteRegKey HKCR "diminutivecoin"
     RmDir /REBOOTOK $SMPROGRAMS\$StartMenuGroup
     RmDir /REBOOTOK $INSTDIR
     Push $R0

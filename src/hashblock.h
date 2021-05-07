@@ -6,24 +6,23 @@
 #define HASHBLOCK_H
 
 #include "uint256.h"
-#include "sph_blake.h"
-#include "sph_bmw.h"
-#include "sph_groestl.h"
-#include "sph_jh.h"
-#include "sph_keccak.h"
-#include "sph_skein.h"
-/** ADDED FOR HMQ1725 */
-#include "sph_luffa.h"
-#include "sph_cubehash.h"
-#include "sph_shavite.h"
-#include "sph_simd.h"
-#include "sph_echo.h"
-#include "sph_hamsi.h"
-#include "sph_fugue.h"
-#include "sph_shabal.h"
-#include "sph_whirlpool.h"
-#include "sph_sha2.h"
-#include "sph_haval.h"
+#include "crypto/sph_blake.h"
+#include "crypto/sph_bmw.h"
+#include "crypto/sph_groestl.h"
+#include "crypto/sph_jh.h"
+#include "crypto/sph_keccak.h"
+#include "crypto/sph_skein.h"
+#include "crypto/sph_luffa.h"
+#include "crypto/sph_cubehash.h"
+#include "crypto/sph_shavite.h"
+#include "crypto/sph_simd.h"
+#include "crypto/sph_echo.h"
+#include "crypto/sph_hamsi.h"
+#include "crypto/sph_fugue.h"
+#include "crypto/sph_shabal.h"
+#include "crypto/sph_whirlpool.h"
+#include "crypto/sph_sha2.h"
+#include "crypto/sph_haval.h"
 
 #ifndef QT_NO_DEBUG
 #include <string>
@@ -42,7 +41,6 @@ GLOBAL sph_groestl512_context   z_groestl;
 GLOBAL sph_jh512_context        z_jh;
 GLOBAL sph_keccak512_context    z_keccak;
 GLOBAL sph_skein512_context     z_skein;
-/** ADDED FOR HMQ1725 */
 GLOBAL sph_luffa512_context     z_luffa;
 GLOBAL sph_cubehash512_context  z_cubehash;
 GLOBAL sph_shavite512_context   z_shavite;
@@ -81,7 +79,6 @@ GLOBAL sph_haval256_5_context   z_haval;
 #define ZJH (memcpy(&ctx_jh, &z_jh, sizeof(z_jh)))
 #define ZKECCAK (memcpy(&ctx_keccak, &z_keccak, sizeof(z_keccak)))
 #define ZSKEIN (memcpy(&ctx_skein, &z_skein, sizeof(z_skein)))
-/** ADDED FOR HMQ1725 */
 #define ZWHIRLPOOL (memcpy(&ctx_whirlpool, &z_whirlpool, sizeof(z_whirlpool)))
 #define ZFUGUE (memcpy(&ctx_fugue, &z_fugue, sizeof(z_fugue)))
 #define ZHAMSI (memcpy(&ctx_hamsi, &z_hamsi, sizeof(z_hamsi)))
@@ -99,7 +96,6 @@ inline uint256 HMQ1725(const T1 pbegin, const T1 pend)
     sph_jh512_context        ctx_jh;
     sph_keccak512_context    ctx_keccak;
     sph_skein512_context     ctx_skein;
-        /** added for HMQ1725 */
     sph_luffa512_context      ctx_luffa;
     sph_cubehash512_context   ctx_cubehash;
     sph_shavite512_context    ctx_shavite;
@@ -115,10 +111,7 @@ inline uint256 HMQ1725(const T1 pbegin, const T1 pend)
     static unsigned char pblank[1];
 
 #ifndef QT_NO_DEBUG
-    //std::string strhash;
-    //strhash = "";
 #endif
-//------------------initial integration of HMQ1725
     uint512 mask = 24;
     uint512 zero = 0;
     

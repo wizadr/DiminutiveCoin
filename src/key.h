@@ -2,8 +2,8 @@
 // Copyright (c) 2009-2013 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef DIMINUTIVEVAULT_KEY_H
-#define DIMINUTIVEVAULT_KEY_H
+#ifndef DIMINUTIVECOIN_KEY_H
+#define DIMINUTIVECOIN_KEY_H
 
 #include <vector>
 

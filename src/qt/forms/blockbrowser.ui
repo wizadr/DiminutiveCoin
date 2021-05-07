@@ -32,7 +32,7 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>DiminutiveVaultCoin Block Explorer</string>
+   <string>DiminutiveCoin Block Explorer</string>
   </property>
   <layout class="QGridLayout">
    <property name="sizeConstraint">

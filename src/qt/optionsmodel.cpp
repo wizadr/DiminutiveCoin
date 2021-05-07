@@ -1,6 +1,6 @@
 #include "optionsmodel.h"
 
-#include "diminutivevaultcoinunits.h"
+#include "diminutivecoinunits.h"
 #include "init.h"
 #include "wallet.h"
 #include "walletdb.h"
@@ -39,7 +39,7 @@ void OptionsModel::Init()
     QSettings settings;
 
     // These are Qt-only settings:
-    nDisplayUnit = settings.value("nDisplayUnit", DiminutiveVaultCoinUnits::DIMI).toInt();
+    nDisplayUnit = settings.value("nDisplayUnit", DiminutiveCoinUnits::DIMI).toInt();
     fMinimizeToTray = settings.value("fMinimizeToTray", true).toBool();
     fMinimizeOnClose = settings.value("fMinimizeOnClose", true).toBool();
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
@@ -48,10 +48,8 @@ void OptionsModel::Init()
     language = settings.value("language", "").toString();
     fUseBlackTheme = settings.value("fUseBlackTheme", true).toBool();
 
-    // These are shared with core DiminutiveVaultCoin; we want
+    // These are shared with core DiminutiveCoin; we want
     // command-line options to override the GUI settings:
-    if (settings.contains("fUseUPnP"))
-        SoftSetBoolArg("-upnp", settings.value("fUseUPnP").toBool());
     if (settings.contains("addrProxy") && settings.value("fUseProxy").toBool())
         SoftSetArg("-proxy", settings.value("addrProxy").toString().toStdString());
     if (!language.isEmpty())
@@ -74,8 +72,6 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return QVariant(GUIUtil::GetStartOnSystemStartup());
         case MinimizeToTray:
             return QVariant(fMinimizeToTray);
-        case MapPortUPnP:
-            return settings.value("fUseUPnP", GetBoolArg("-upnp", true));
         case MinimizeOnClose:
             return QVariant(fMinimizeOnClose);
         case ProxyUse:
@@ -127,10 +123,6 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
         case MinimizeToTray:
             fMinimizeToTray = value.toBool();
             settings.setValue("fMinimizeToTray", fMinimizeToTray);
-            break;
-        case MapPortUPnP:
-            settings.setValue("fUseUPnP", value.toBool());
-            MapPort(value.toBool());
             break;
         case MinimizeOnClose:
             fMinimizeOnClose = value.toBool();

@@ -6,9 +6,9 @@
 #include "version.h"
 
 // Name of client reported in the 'version' message. Report the same name
-// for both diminutivevaultcoind and diminutivevaultcoin-qt, to make it harder for attackers to
+// for both diminutivecoind and diminutivecoin-qt, to make it harder for attackers to
 // target servers or GUI users specifically.
-const std::string CLIENT_NAME("DiminutiveVaultCoin");
+const std::string CLIENT_NAME("DiminutiveCoin");
 
 // Client version number
 #define CLIENT_VERSION_SUFFIX   ""
@@ -30,14 +30,15 @@ const std::string CLIENT_NAME("DiminutiveVaultCoin");
 
 // First, include build.h if requested
 #ifdef HAVE_BUILD_INFO
+#    include "obj/build.h"
 #    include "build.h"
 #endif
 
 // git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
-#define GIT_ARCHIVE 1
+
 #ifdef GIT_ARCHIVE
-#    define GIT_COMMIT_ID "-DiminutiveVaultCoinchain"
-#    define GIT_COMMIT_DATE "$Format:%cD"
+#    define GIT_COMMIT_ID "-Devaulted"
+#    define GIT_COMMIT_DATE "$Format:%cD$"
 #endif
 
 #define BUILD_DESC_FROM_COMMIT(maj,min,rev,build,commit) \

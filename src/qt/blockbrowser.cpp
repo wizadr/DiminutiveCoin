@@ -148,7 +148,7 @@ std::string getOutputs(std::string txid)
 
         double buffer = convertCoins(txout.nValue);
         std::string amount = boost::to_string(buffer);
-		str.append(CDiminutiveVaultCoinAddress(address).ToString());
+		str.append(CDiminutiveCoinAddress(address).ToString());
         str.append(": ");
         str.append(amount);
         str.append(" DIMI");
@@ -186,7 +186,7 @@ std::string getInputs(std::string txid)
 
         double buffer = convertCoins(wtxPrev.vout[vin.prevout.n].nValue);
         std::string amount = boost::to_string(buffer);
-        str.append(CDiminutiveVaultCoinAddress(address).ToString());
+        str.append(CDiminutiveCoinAddress(address).ToString());
         str.append(": ");
         str.append(amount);
         str.append(" DIMI");

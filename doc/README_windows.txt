@@ -1,6 +1,6 @@
-DiminutiveVaultCoin 1.1.0.0
+DiminutiveCoin 1.0.1.0
 
-Copyright (c) 2018 DiminutiveVault Developers
+Copyright (c) 2020-2021 DiminutiveCoin Developers
 Copyright (c) 2013 NovaCoin Developers
 Copyright (c) 2011-2013 PPCoin Developers
 Distributed under the MIT/X11 software license, see the accompanying
@@ -12,4 +12,4 @@ cryptographic software written by Eric Young (eay@cryptsoft.com).
 
 Intro
 -----
-DiminutiveVaultCoin is a free open source project with the goal of providing a long-term energy-efficient cryptocollectible.
+DiminutiveCoin is a free open source project with the goal of providing a long-term energy-efficient solutions

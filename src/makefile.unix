@@ -2,7 +2,8 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-USE_UPNP:=0
+STRIP=strip
+
 USE_WALLET:=1
 
 LINK:=$(CXX)
@@ -32,14 +33,6 @@ LIBS += \
    -l db_cxx$(BDB_LIB_SUFFIX) \
    -l ssl \
    -l crypto
-
-ifndef USE_UPNP
-	override USE_UPNP = -
-endif
-ifneq (${USE_UPNP}, -)
-	LIBS += -l miniupnpc
-	DEFS += -DUSE_UPNP=$(USE_UPNP)
-endif
 
 LIBS+= \
  -Wl,-B$(LMODE2) \
@@ -107,7 +100,7 @@ OBJS= \
     obj/crypter.o \
     obj/key.o \
     obj/init.o \
-    obj/diminutivevaultcoind.o \
+    obj/diminutivecoind.o \
     obj/keystore.o \
     obj/core.o \
     obj/main.o \
@@ -134,24 +127,24 @@ OBJS= \
     obj/scrypt-x86.o \
     obj/scrypt-x86_64.o \
     obj/chainparams.o \
-    obj/blake.o\
-    obj/bmw.o\
-    obj/groestl.o\
-    obj/jh.o\
-    obj/keccak.o\
-    obj/skein.o\
-    obj/cubehash.o \
-    obj/luffa.o \
-    obj/aes_helper.o \
-    obj/echo.o \
-    obj/shavite.o \
-    obj/simd.o \
-    obj/hamsi.o \
-    obj/fugue.o \
-    obj/shabal.o \
-    obj/whirlpool.o \
-    obj/haval.o \
-    obj/sha2big.o
+    obj/crypto/blake.o\
+    obj/crypto/bmw.o\
+    obj/crypto/groestl.o\
+    obj/crypto/jh.o\
+    obj/crypto/keccak.o\
+    obj/crypto/skein.o\
+    obj/crypto/cubehash.o \
+    obj/crypto/luffa.o \
+    obj/crypto/aes_helper.o \
+    obj/crypto/echo.o \
+    obj/crypto/shavite.o \
+    obj/crypto/simd.o \
+    obj/crypto/hamsi.o \
+    obj/crypto/fugue.o \
+    obj/crypto/shabal.o \
+    obj/crypto/whirlpool.o \
+    obj/crypto/haval.o \
+    obj/crypto/sha2big.o
 
 ifeq (${USE_WALLET}, 1)
     DEFS += -DENABLE_WALLET
@@ -165,7 +158,7 @@ ifeq (${USE_WALLET}, 1)
         obj/walletdb.o
 endif
 
-all: diminutivevaultcoind
+all: diminutivecoind
 
 LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
 DEFS += $(addprefix -I,$(CURDIR)/leveldb/include)
@@ -206,11 +199,12 @@ obj/%.o: %.c
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 	  rm -f $(@:%.o=%.d)
 
-diminutivevaultcoind: $(OBJS:obj/%=obj/%)
+diminutivecoind: $(OBJS:obj/%=obj/%)
 	$(LINK) $(xCXXFLAGS) -o $@ $^ $(xLDFLAGS) $(LIBS)
+	$(STRIP) diminutivecoind
 
 clean:
-	-rm -f diminutivevaultcoind
+	-rm -f diminutivecoind
 	-rm -f obj/*.o
 	-rm -f obj/*.P
 	-rm -f obj/build.h

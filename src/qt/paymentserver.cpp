@@ -22,8 +22,8 @@
 
 using namespace boost;
 
-const int DIMINUTIVEVAULT_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
-const QString DIMINUTIVEVAULT_IPC_PREFIX("diminutivevaultcoin:");
+const int DIMINUTIVECOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
+const QString DIMINUTIVECOIN_IPC_PREFIX("diminutivecoin:");
 
 //
 // Create a name that is unique for:
@@ -32,7 +32,7 @@ const QString DIMINUTIVEVAULT_IPC_PREFIX("diminutivevaultcoin:");
 //
 static QString ipcServerName()
 {
-    QString name("DiminutiveVaultCoinQt");
+    QString name("DiminutiveCoinQt");
 
     // Append a simple hash of the datadir
     // Note that GetDataDir(true) returns a different path
@@ -63,7 +63,7 @@ bool PaymentServer::ipcSendCommandLine()
     const QStringList& args = qApp->arguments();
     for (int i = 1; i < args.size(); i++)
     {
-        if (!args[i].startsWith(DIMINUTIVEVAULT_IPC_PREFIX, Qt::CaseInsensitive))
+        if (!args[i].startsWith(DIMINUTIVECOIN_IPC_PREFIX, Qt::CaseInsensitive))
             continue;
         savedPaymentRequests.append(args[i]);
     }
@@ -72,7 +72,7 @@ bool PaymentServer::ipcSendCommandLine()
     {
         QLocalSocket* socket = new QLocalSocket();
         socket->connectToServer(ipcServerName(), QIODevice::WriteOnly);
-        if (!socket->waitForConnected(DIMINUTIVEVAULT_IPC_CONNECT_TIMEOUT))
+        if (!socket->waitForConnected(DIMINUTIVECOIN_IPC_CONNECT_TIMEOUT))
             return false;
 
         QByteArray block;
@@ -83,7 +83,7 @@ bool PaymentServer::ipcSendCommandLine()
         socket->write(block);
         socket->flush();
 
-        socket->waitForBytesWritten(DIMINUTIVEVAULT_IPC_CONNECT_TIMEOUT);
+        socket->waitForBytesWritten(DIMINUTIVECOIN_IPC_CONNECT_TIMEOUT);
         socket->disconnectFromServer();
         delete socket;
         fResult = true;
@@ -93,7 +93,7 @@ bool PaymentServer::ipcSendCommandLine()
 
 PaymentServer::PaymentServer(QApplication* parent) : QObject(parent), saveURIs(true)
 {
-    // Install global event filter to catch QFileOpenEvents on the mac (sent when you click diminutivevaultcoin: links)
+    // Install global event filter to catch QFileOpenEvents on the mac (sent when you click diminutivecoin: links)
     parent->installEventFilter(this);
 
     QString name = ipcServerName();
@@ -104,14 +104,14 @@ PaymentServer::PaymentServer(QApplication* parent) : QObject(parent), saveURIs(t
     uriServer = new QLocalServer(this);
 
     if (!uriServer->listen(name))
-        qDebug() << tr("Cannot start diminutivevaultcoin: click-to-pay handler");
+        qDebug() << tr("Cannot start diminutivecoin: click-to-pay handler");
     else
         connect(uriServer, SIGNAL(newConnection()), this, SLOT(handleURIConnection()));
 }
 
 bool PaymentServer::eventFilter(QObject *object, QEvent *event)
 {
-    // clicking on diminutivevaultcoin: URLs creates FileOpen events on the Mac:
+    // clicking on diminutivecoin: URLs creates FileOpen events on the Mac:
     if (event->type() == QEvent::FileOpen)
     {
         QFileOpenEvent* fileEvent = static_cast<QFileOpenEvent*>(event);

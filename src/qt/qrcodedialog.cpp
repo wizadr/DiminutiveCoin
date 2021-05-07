@@ -1,7 +1,7 @@
 #include "qrcodedialog.h"
 #include "ui_qrcodedialog.h"
 
-#include "diminutivevaultcoinunits.h"
+#include "diminutivecoinunits.h"
 #include "guiconstants.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
@@ -83,7 +83,7 @@ void QRCodeDialog::genCode()
 
 QString QRCodeDialog::getURI()
 {
-    QString ret = QString("diminutivevaultcoin:%1").arg(address);
+    QString ret = QString("diminutivecoin:%1").arg(address);
     int paramCount = 0;
 
     ui->outUri->clear();
@@ -93,7 +93,7 @@ QString QRCodeDialog::getURI()
         if (ui->lnReqAmount->validate())
         {
             // even if we allow a non DIMI unit input in lnReqAmount, we generate the URI with DIMI as unit (as defined in BIP21)
-            ret += QString("?amount=%1").arg(DiminutiveVaultCoinUnits::format(DiminutiveVaultCoinUnits::DIMI, ui->lnReqAmount->value()));
+            ret += QString("?amount=%1").arg(DiminutiveCoinUnits::format(DiminutiveCoinUnits::DIMI, ui->lnReqAmount->value()));
             paramCount++;
         }
         else

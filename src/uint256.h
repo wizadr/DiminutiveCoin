@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef DIMINUTIVEVAULT_UINT256_H
-#define DIMINUTIVEVAULT_UINT256_H
+#ifndef DIMINUTIVECOIN_UINT256_H
+#define DIMINUTIVECOIN_UINT256_H
 
 #include <string>
 #include <vector>
@@ -919,4 +919,4 @@ inline int Testuint256AdHoc(std::vector<std::string> vArg)
 
 #endif
 
-#endif // DIMINUTIVEVAULT_UINT256_H
+#endif // DIMINUTIVECOIN_UINT256_H

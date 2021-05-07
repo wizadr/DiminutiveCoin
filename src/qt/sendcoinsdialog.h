@@ -15,7 +15,7 @@ QT_BEGIN_NAMESPACE
 class QUrl;
 QT_END_NAMESPACE
 
-/** Dialog for sending diminutivevaultcoins */
+/** Dialog for sending diminutivecoins */
 class SendCoinsDialog : public QDialog
 {
     Q_OBJECT

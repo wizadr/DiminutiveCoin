@@ -2,8 +2,8 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef DIMINUTIVEVAULT_MAIN_H
-#define DIMINUTIVEVAULT_MAIN_H
+#ifndef DIMINUTIVE_MAIN_H
+#define DIMINUTIVE_MAIN_H
 
 #include "core.h"
 #include "bignum.h"
@@ -57,7 +57,7 @@ inline int64_t FutureDrift(int64_t nTime) { return nTime + 30 * 60; }
 /** Block target spacing defines */
 inline unsigned int GetTargetSpacing(int nHeight) {return 75; }
 
-inline bool IsVaultPOS(int nHeight) { return TestNet() || nHeight > 40000; }
+inline bool IsWavePOS(int nHeight) { return TestNet() || nHeight > 40000; }
 
 extern CScript COINBASE_FLAGS;
 extern CCriticalSection cs_main;
@@ -139,7 +139,7 @@ const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfSta
 void ThreadStakeMiner(CWallet *pwallet);
 
 //         
-//    DImInUtiVeVaUlT POW / POS  Vaulting Protocol 
+//    Diminutive Wave POW / POS Protocol 
 //        Peak POW     Next Peak POW
 //         #            #
 //        # #          # #
@@ -289,7 +289,7 @@ public:
         return (vin.size() > 0 && (!vin[0].prevout.IsNull()) && vout.size() >= 2 && vout[0].IsEmpty());
     }
 
-    /** Amount of diminutivevaultcoins spent by this transaction.
+    /** Amount of diminutivecoins spent by this transaction.
         @return sum of all outputs (note: does not include fees)
      */
     int64_t GetValueOut() const
@@ -304,7 +304,7 @@ public:
         return nValueOut;
     }
 
-    /** Amount of diminutivevaultcoins coming in to this transaction
+    /** Amount of diminutivecoins coming in to this transaction
         Note that lightweight clients may not know anything besides the hash of previous transactions,
         so may not be able to calculate this.
 

@@ -3,7 +3,7 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-# Mac OS X makefile for diminutivevaultcoin
+# Mac OS X makefile for diminutivecoin
 # Originally by Laszlo Hanyecz (solar@heliacal.net)
 
 CXX=llvm-g++
@@ -19,13 +19,12 @@ LIBPATHS= \
  -L"$(DEPSDIR)/lib" \
  -L"$(DEPSDIR)/lib/db48"
 
-USE_UPNP:=1
 USE_WALLET:=1
 
 LIBS= -dead_strip
 
 ifdef STATIC
-# Build STATIC if you are redistributing the diminutivevaultcoind binary
+# Build STATIC if you are redistributing the diminutivecoind binary
 LIBS += \
  $(DEPSDIR)/lib/db48/libdb_cxx-4.8.a \
  $(DEPSDIR)/lib/libboost_system-mt.a \
@@ -70,7 +69,7 @@ OBJS= \
     obj/crypter.o \
     obj/key.o \
     obj/init.o \
-    obj/diminutivevaultcoind.o \
+    obj/diminutivecoind.o \
     obj/keystore.o \
     obj/core.o \
     obj/main.o \
@@ -96,24 +95,24 @@ OBJS= \
     obj/scrypt-x86.o \
     obj/scrypt-x86_64.o \
     obj/chainparams.o \
-    obj/blake.o\
-    obj/bmw.o\
-    obj/groestl.o\
-    obj/jh.o\
-    obj/keccak.o\
-    obj/skein.o\
-    obj/cubehash.o \
-    obj/luffa.o \
-    obj/aes_helper.o \
-    obj/echo.o \
-    obj/shavite.o \
-    obj/simd.o \
-    obj/hamsi.o \
-    obj/fugue.o \
-    obj/shabal.o \
-    obj/whirlpool.o \
-    obj/haval.o \
-    obj/sha2big.o
+    obj/crypto/blake.o\
+    obj/crypto/bmw.o\
+    obj/crypto/groestl.o\
+    obj/crypto/jh.o\
+    obj/crypto/keccak.o\
+    obj/crypto/skein.o\
+    obj/crypto/cubehash.o \
+    obj/crypto/luffa.o \
+    obj/crypto/aes_helper.o \
+    obj/crypto/echo.o \
+    obj/crypto/shavite.o \
+    obj/crypto/simd.o \
+    obj/crypto/hamsi.o \
+    obj/crypto/fugue.o \
+    obj/crypto/shabal.o \
+    obj/crypto/whirlpool.o \
+    obj/crypto/haval.o \
+    obj/crypto/sha2big.o
 
 ifeq (${USE_WALLET}, 1)
     DEFS += -DENABLE_WALLET
@@ -127,19 +126,7 @@ ifeq (${USE_WALLET}, 1)
         obj/walletdb.o
 endif
 
-ifndef USE_UPNP
-	override USE_UPNP = -
-endif
-ifneq (${USE_UPNP}, -)
-	DEFS += -DUSE_UPNP=$(USE_UPNP)
-ifdef STATIC
-	LIBS += $(DEPSDIR)/lib/libminiupnpc.a
-else
-	LIBS += -lminiupnpc
-endif
-endif
-
-all: diminutivevaultcoind
+all: diminutivecoind
 
 LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
 DEFS += $(addprefix -I,$(CURDIR)/leveldb/include)
@@ -177,11 +164,11 @@ obj/scrypt-x86.o: scrypt-x86.S
 obj/scrypt-x86_64.o: scrypt-x86_64.S
 	$(CXX) -c $(xCXXFLAGS) -MMD -o $@ $<
 
-diminutivevaultcoind: $(OBJS:obj/%=obj/%)
+diminutivecoind: $(OBJS:obj/%=obj/%)
 	$(CXX) $(CFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)
 
 clean:
-	-rm -f diminutivevaultcoind
+	-rm -f diminutivecoind
 	-rm -f obj/*.o
 	-rm -f obj/*.P
 	-rm -f obj/build.h

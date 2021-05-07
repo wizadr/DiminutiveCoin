@@ -331,7 +331,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
         {
             string strAddress;
             ssKey >> strAddress;
-            ssValue >> pwallet->mapAddressBook[CDiminutiveVaultCoinAddress(strAddress).Get()];
+            ssValue >> pwallet->mapAddressBook[CDiminutiveCoinAddress(strAddress).Get()];
         }
         else if (strType == "tx")
         {
@@ -663,7 +663,7 @@ DBErrors CWalletDB::LoadWallet(CWallet* pwallet)
 void ThreadFlushWalletDB(const string& strFile)
 {
     // Make this thread recognisable as the wallet flushing thread
-    RenameThread("diminutivevaultcoin-wallet");
+    RenameThread("diminutivecoin-wallet");
 
     static bool fOneThread;
     if (fOneThread)

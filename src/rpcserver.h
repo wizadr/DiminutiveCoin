@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef _DIMINUTIVEVAULTRPC_SERVER_H_
-#define _DIMINUTIVEVAULTRPC_SERVER_H_ 1
+#ifndef _DIMINUTIVECOINRPC_SERVER_H_
+#define _DIMINUTIVECOINRPC_SERVER_H_ 1
 
 #include "uint256.h"
 #include "rpcprotocol.h"
@@ -50,7 +50,7 @@ public:
 };
 
 /**
- * DiminutiveVaultCoin RPC command dispatcher.
+ * DiminutiveCoin RPC command dispatcher.
  */
 class CRPCTable
 {

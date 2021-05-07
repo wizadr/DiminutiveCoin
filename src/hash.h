@@ -2,8 +2,8 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef DIMINUTIVEVAULT_HASH_H
-#define DIMINUTIVEVAULT_HASH_H
+#ifndef DIMINUTIVECOIN_HASH_H
+#define DIMINUTIVECOIN_HASH_H
 
 #include "uint256.h"
 #include "serialize.h"

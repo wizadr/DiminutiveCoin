@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef H_DIMINUTIVEVAULT_SCRIPT
-#define H_DIMINUTIVEVAULT_SCRIPT
+#ifndef H_DIMINUTIVECOIN_SCRIPT
+#define H_DIMINUTIVECOIN_SCRIPT
 
 #include <string>
 #include <vector>
@@ -103,7 +103,7 @@ public:
  *  * CNoDestination: no destination set
  *  * CKeyID: TX_PUBKEYHASH destination
  *  * CScriptID: TX_SCRIPTHASH destination
- *  A CTxDestination is the internal data type encoded in a CDiminutiveVaultCoinAddress
+ *  A CTxDestination is the internal data type encoded in a CDiminutiveCoinAddress
  */
 typedef boost::variant<CNoDestination, CKeyID, CScriptID> CTxDestination;
 
@@ -568,7 +568,7 @@ public:
         return nFound;
     }
 
-    // Pre-version-0.6, DiminutiveVaultCoin always counted CHECKMULTISIGs
+    // Pre-version-0.6, DiminutiveCoin always counted CHECKMULTISIGs
     // as 20 sigops. With pay-to-script-hash, that changed:
     // CHECKMULTISIGs serialized in scriptSigs are
     // counted more accurately, assuming they are of the form

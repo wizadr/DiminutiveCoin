@@ -26,11 +26,13 @@ struct SeedSpec6 {
 
 // Convert the pnSeeds6 array into usable address objects.
 static void convertSeed6(std::vector<CAddress> &vSeedsOut, const SeedSpec6 *data, unsigned int count)
+
 {
     // It'll only connect to one or two seed nodes because once it connects,
     // it'll get a pile of addresses with newer timestamps.
     // Seed nodes are given a random 'last seen time' of between one and two
     // weeks ago.
+
     const int64_t nOneWeek = 7*24*60*60;
     for (unsigned int i = 0; i < count; i++)
     {
@@ -54,10 +56,9 @@ public:
         pchMessageStart[3] = 0x56;
         nDefaultPort = 49139;
         nRPCPort = 49122;
-        //nDefaultPort = 16000;
-       // nRPCPort = 16001;	    
-	    
-        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20);
+	bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20);
+
+        // Build the genesis block.
 	const char* pszTimestamp = "Diminitivevault needs a new chain sha256 failed 20200121"; //
         std::vector<CTxIn> vin;
         vin.resize(1);
@@ -80,26 +81,28 @@ public:
         assert(hashGenesisBlock == uint256("0x2ce9a9e271caa8fc164d29ea497f60f0a0f6a05998db2430bc5003da148b6699"));
         assert(genesis.hashMerkleRoot == uint256("0x84346f5d939fa8c9d3548f3c3f31ef29f1b7972a43878453d3a5a4c176836459"));
 
-	vSeeds.push_back(CDNSSeedData("95.111.247.164","95.111.247.164"));     // New seed node 1
-	vSeeds.push_back(CDNSSeedData("207.180.216.126","207.180.216.126"));   // New seed node 2
-	vSeeds.push_back(CDNSSeedData("207.180.208.187","207.180.208.187"));   // New seed node 3
-	vSeeds.push_back(CDNSSeedData("78.57.248.53","78.57.248.53"));         // New seed node 4
-        vSeeds.push_back(CDNSSeedData("seed1.dimi.net","51.75.162.95"));       // Old seed node 1 
-	vSeeds.push_back(CDNSSeedData("seed2.dimi.net","51.38.71.12"));        // Old seed node 2
-	vSeeds.push_back(CDNSSeedData("seed3.dimi.net","167.86.94.93"));       // Old seed node 3
-      
-       
+        /** DEPRICATED IN QT 5.6+ (To compile on Qt5.5.1 and lower uncomment  */
+        /*
+        base58Prefixes[PUBKEY_ADDRESS] = list_of(32);
+        base58Prefixes[SCRIPT_ADDRESS] = list_of(30);
+        base58Prefixes[SECRET_KEY] =     list_of(181);
+        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0xAD)(0x1B)(0x12)(0xA4);
+        base58Prefixes[EXT_SECRET_KEY] = list_of(0xE1)(0xA3)(0x2B)(0x3E);
+        */
+        /** REQUIRED IN QT 5.6+  (To compile on Qt5.5.1 and lower comment out below) */
 	base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 32);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 30);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1, 181);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0xAD)(0x1B)(0x12)(0xA4).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0xE1)(0xA3)(0x2B)(0x3E).convert_to_container<std::vector<unsigned char> >();
 
+        // DiminutiveCoin DNS seed servers
+        vSeeds.push_back(CDNSSeedData("DNSSeeder1", "dns1.diminutivecoin.com"));   // DNSseed server #1
+        vSeeds.push_back(CDNSSeedData("DNSSeeder2", "dns2.diminutivecoin.com"));   // DNSseed server #1
+
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
 	nLastPOWBlock = 9999999999;
-
-        
     }
 
     virtual const CBlock& GenesisBlock() const { return genesis; }
@@ -108,6 +111,7 @@ public:
     virtual const vector<CAddress>& FixedSeeds() const {
         return vFixedSeeds;
     }
+
 protected:
     CBlock genesis;
     vector<CAddress> vFixedSeeds;

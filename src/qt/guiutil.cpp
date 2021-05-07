@@ -2,9 +2,9 @@
 
 #include "guiutil.h"
 
-#include "diminutivevaultcoinaddressvalidator.h"
+#include "diminutivecoinaddressvalidator.h"
 #include "walletmodel.h"
-#include "diminutivevaultcoinunits.h"
+#include "diminutivecoinunits.h"
 
 #include "util.h"
 #include "init.h"
@@ -54,7 +54,7 @@ QString dateTimeStr(qint64 nTime)
     return dateTimeStr(QDateTime::fromTime_t((qint32)nTime));
 }
 
-QFont diminutivevaultcoinAddressFont()
+QFont diminutivecoinAddressFont()
 {
     QFont font("Monospace");
 #if QT_VERSION >= 0x040800
@@ -67,9 +67,9 @@ QFont diminutivevaultcoinAddressFont()
 
 void setupAddressWidget(QLineEdit *widget, QWidget *parent)
 {
-    widget->setMaxLength(DiminutiveVaultCoinAddressValidator::MaxAddressLength);
-    widget->setValidator(new DiminutiveVaultCoinAddressValidator(parent));
-    widget->setFont(diminutivevaultcoinAddressFont());
+    widget->setMaxLength(DiminutiveCoinAddressValidator::MaxAddressLength);
+    widget->setValidator(new DiminutiveCoinAddressValidator(parent));
+    widget->setFont(diminutivecoinAddressFont());
 }
 
 void setupAmountWidget(QLineEdit *widget, QWidget *parent)
@@ -81,10 +81,10 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
     widget->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
 }
 
-bool parseDiminutiveVaultCoinURI(const QUrl &uri, SendCoinsRecipient *out)
+bool parseDiminutiveCoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
     // NovaCoin: check prefix
-    if(uri.scheme() != QString("diminutivevaultcoin"))
+    if(uri.scheme() != QString("diminutivecoin"))
         return false;
 
     SendCoinsRecipient rv;
@@ -109,7 +109,7 @@ bool parseDiminutiveVaultCoinURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!DiminutiveVaultCoinUnits::parse(DiminutiveVaultCoinUnits::DIMI, i->second, &rv.amount))
+                if(!DiminutiveCoinUnits::parse(DiminutiveCoinUnits::DIMI, i->second, &rv.amount))
                 {
                     return false;
                 }
@@ -127,18 +127,18 @@ bool parseDiminutiveVaultCoinURI(const QUrl &uri, SendCoinsRecipient *out)
     return true;
 }
 
-bool parseDiminutiveVaultCoinURI(QString uri, SendCoinsRecipient *out)
+bool parseDiminutiveCoinURI(QString uri, SendCoinsRecipient *out)
 {
-    // Convert diminutivevaultcoin:// to diminutivevaultcoin:
+    // Convert diminutivecoin:// to diminutivecoin:
     //
-    //    Cannot handle this later, because diminutivevaultcoin:// will cause Qt to see the part after // as host,
+    //    Cannot handle this later, because diminutivecoin:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("diminutivevaultcoin://"))
+    if(uri.startsWith("diminutivecoin://"))
     {
-        uri.replace(0, 12, "diminutivevaultcoin:");
+        uri.replace(0, 12, "diminutivecoin:");
     }
     QUrl uriInstance(uri);
-    return parseDiminutiveVaultCoinURI(uriInstance, out);
+    return parseDiminutiveCoinURI(uriInstance, out);
 }
 
 QString HtmlEscape(const QString& str, bool fMultiLine)
@@ -256,7 +256,7 @@ void openConfigfile()
 {
     boost::filesystem::path pathConfig = GetConfigFile();
 
-    /* Open diminutivevaultcoin.conf with the associated application */
+    /* Open diminutivecoin.conf with the associated application */
     if (boost::filesystem::exists(pathConfig))
         QDesktopServices::openUrl(QUrl::fromLocalFile(QString::fromStdString(pathConfig.string())));
 }
@@ -288,12 +288,12 @@ bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
 #ifdef WIN32
 boost::filesystem::path static StartupShortcutPath()
 {
-    return GetSpecialFolderPath(CSIDL_STARTUP) / "DiminutiveVaultCoin.lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / "DiminutiveCoin.lnk";
 }
 
 bool GetStartOnSystemStartup()
 {
-    // check for DiminutiveVaultCoin.lnk
+    // check for DiminutiveCoin.lnk
     return boost::filesystem::exists(StartupShortcutPath());
 }
 
@@ -370,7 +370,7 @@ boost::filesystem::path static GetAutostartDir()
 
 boost::filesystem::path static GetAutostartFilePath()
 {
-    return GetAutostartDir() / "diminutivevaultcoin.desktop";
+    return GetAutostartDir() / "diminutivecoin.desktop";
 }
 
 bool GetStartOnSystemStartup()
@@ -408,10 +408,10 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         boost::filesystem::ofstream optionFile(GetAutostartFilePath(), std::ios_base::out|std::ios_base::trunc);
         if (!optionFile.good())
             return false;
-        // Write a diminutivevaultcoin.desktop file to the autostart directory:
+        // Write a diminutivecoin.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
-        optionFile << "Name=DiminutiveVaultCoin\n";
+        optionFile << "Name=DiminutiveCoin\n";
         optionFile << "Exec=" << pszExePath << " -min\n";
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -432,10 +432,10 @@ bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
 HelpMessageBox::HelpMessageBox(QWidget *parent) :
     QMessageBox(parent)
 {
-    header = tr("DiminutiveVaultCoin-Qt") + " " + tr("version") + " " +
+    header = tr("DiminutiveCoin-Qt") + " " + tr("version") + " " +
         QString::fromStdString(FormatFullVersion()) + "\n\n" +
         tr("Usage:") + "\n" +
-        "  diminutivevaultcoin-qt [" + tr("command-line options") + "]                     " + "\n";
+        "  diminutivecoin-qt [" + tr("command-line options") + "]                     " + "\n";
 
     coreOptions = QString::fromStdString(HelpMessage());
 
@@ -444,7 +444,7 @@ HelpMessageBox::HelpMessageBox(QWidget *parent) :
         "  -min                   " + tr("Start minimized") + "\n" +
         "  -splash                " + tr("Show splash screen on startup (default: 1)") + "\n";
 
-    setWindowTitle(tr("DiminutiveVaultCoin-Qt"));
+    setWindowTitle(tr("DiminutiveCoin-Qt"));
     setTextFormat(Qt::PlainText);
     // setMinimumWidth is ignored for QMessageBox so put in non-breaking spaces to make it wider.
     setText(header + QString(QChar(0x2003)).repeated(50));

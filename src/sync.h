@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef DIMINUTIVEVAULT_SYNC_H
-#define DIMINUTIVEVAULT_SYNC_H
+#ifndef DIMINUTIVECOIN_SYNC_H
+#define DIMINUTIVECOIN_SYNC_H
 
 #include "threadsafety.h"
 

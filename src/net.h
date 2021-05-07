@@ -2,8 +2,8 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef DIMINUTIVEVAULT_NET_H
-#define DIMINUTIVEVAULT_NET_H
+#ifndef DIMINUTIVECOIN_NET_H
+#define DIMINUTIVECOIN_NET_H
 
 #include <deque>
 #include <boost/array.hpp>
@@ -42,7 +42,6 @@ CNode* FindNode(const CNetAddr& ip);
 CNode* FindNode(const std::string& addrName);
 CNode* FindNode(const CService& ip);
 CNode* ConnectNode(CAddress addrConnect, const char *strDest = NULL);
-void MapPort(bool fUseUPnP);
 unsigned short GetListenPort();
 bool BindListenPort(const CService &bindAddr, std::string& strError=REF(std::string()));
 void StartNode(boost::thread_group& threadGroup);
@@ -64,7 +63,6 @@ enum
     LOCAL_NONE,   // unknown
     LOCAL_IF,     // address a local interface listens on
     LOCAL_BIND,   // address explicit bound to
-    LOCAL_UPNP,   // address reported by UPnP
     LOCAL_MANUAL, // address explicitly specified (-externalip=)
 
     LOCAL_MAX

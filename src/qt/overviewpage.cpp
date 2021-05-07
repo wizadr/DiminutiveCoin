@@ -3,7 +3,7 @@
 
 #include "clientmodel.h"
 #include "walletmodel.h"
-#include "diminutivevaultcoinunits.h"
+#include "diminutivecoinunits.h"
 #include "optionsmodel.h"
 #include "transactiontablemodel.h"
 #include "transactionfilterproxy.h"
@@ -20,7 +20,7 @@ class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 public:
-    TxViewDelegate(): QAbstractItemDelegate(), unit(DiminutiveVaultCoinUnits::DIMI)
+    TxViewDelegate(): QAbstractItemDelegate(), unit(DiminutiveCoinUnits::DIMI)
     {
 
     }
@@ -67,7 +67,7 @@ public:
             foreground = option.palette.color(QPalette::Text);
         }
         painter->setPen(fUseBlackTheme ? QColor(79, 194, 196) : foreground);
-        QString amountText = DiminutiveVaultCoinUnits::formatWithUnit(unit, amount, true);
+        QString amountText = DiminutiveCoinUnits::formatWithUnit(unit, amount, true);
         if(!confirmed)
         {
             amountText = QString("[") + amountText + QString("]");
@@ -148,11 +148,11 @@ void OverviewPage::setBalance(qint64 balance, qint64 stake, qint64 unconfirmedBa
     currentStake = stake;
     currentUnconfirmedBalance = unconfirmedBalance;
     currentImmatureBalance = immatureBalance;
-    ui->labelBalance->setText(DiminutiveVaultCoinUnits::formatWithUnit(unit, balance));
-    ui->labelStake->setText(DiminutiveVaultCoinUnits::formatWithUnit(unit, stake));
-    ui->labelUnconfirmed->setText(DiminutiveVaultCoinUnits::formatWithUnit(unit, unconfirmedBalance));
-    ui->labelImmature->setText(DiminutiveVaultCoinUnits::formatWithUnit(unit, immatureBalance));
-    ui->labelTotal->setText(DiminutiveVaultCoinUnits::formatWithUnit(unit, balance + stake + unconfirmedBalance + immatureBalance));
+    ui->labelBalance->setText(DiminutiveCoinUnits::formatWithUnit(unit, balance));
+    ui->labelStake->setText(DiminutiveCoinUnits::formatWithUnit(unit, stake));
+    ui->labelUnconfirmed->setText(DiminutiveCoinUnits::formatWithUnit(unit, unconfirmedBalance));
+    ui->labelImmature->setText(DiminutiveCoinUnits::formatWithUnit(unit, immatureBalance));
+    ui->labelTotal->setText(DiminutiveCoinUnits::formatWithUnit(unit, balance + stake + unconfirmedBalance + immatureBalance));
 
     // only show immature (newly mined) balance if it's non-zero, so as not to complicate things
     // for the non-mining users

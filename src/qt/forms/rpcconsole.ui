@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>DiminutiveVaultCoin - Debug window</string>
+   <string>DiminutiveCoin - Debug window</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -36,7 +36,7 @@
           </font>
          </property>
          <property name="text">
-          <string>DiminutiveVaultCoin Core</string>
+          <string>DiminutiveCoin Core</string>
          </property>
         </widget>
        </item>
@@ -306,7 +306,7 @@
        <item row="14" column="0">
         <widget class="QPushButton" name="openDebugLogfileButton">
          <property name="toolTip">
-          <string>Open the DiminutiveVaultCoin debug log file from the current data directory. This can take a few seconds for large log files.</string>
+          <string>Open the DiminutiveCoin debug log file from the current data directory. This can take a few seconds for large log files.</string>
          </property>
          <property name="text">
           <string>&amp;Open</string>
@@ -319,7 +319,7 @@
        <item row="14" column="1">
         <widget class="QPushButton" name="openConfigurationfileButton">
          <property name="toolTip">
-          <string>Open the DiminutiveVaultCoin configuration file from the current data directory.</string>
+          <string>Open the DiminutiveCoin configuration file from the current data directory.</string>
          </property>
          <property name="styleSheet">
           <string notr="true"/>
@@ -348,7 +348,7 @@
        <item row="16" column="0">
         <widget class="QPushButton" name="showCLOptionsButton">
          <property name="toolTip">
-          <string>Show the DiminutiveVaultCoin-Qt help message to get a list with possible DiminutiveVaultCoin command-line options.</string>
+          <string>Show the DiminutiveCoin-Qt help message to get a list with possible DiminutiveCoin command-line options.</string>
          </property>
          <property name="text">
           <string>&amp;Show</string>
@@ -430,7 +430,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../diminutivevaultcoin.qrc">
+            <iconset resource="../diminutivecoin.qrc">
              <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
            </property>
            <property name="shortcut">
@@ -711,7 +711,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../diminutivevaultcoin.qrc"/>
+  <include location="../diminutivecoin.qrc"/>
  </resources>
  <connections/>
 </ui>

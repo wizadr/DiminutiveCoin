@@ -52,20 +52,20 @@ bool static TestSplitHost(string test, string host, int port)
 
 BOOST_AUTO_TEST_CASE(netbase_splithost)
 {
-    BOOST_CHECK(TestSplitHost("www.diminutivevaultcoin.org", "www.diminutivevaultcoin.org", -1));
-    BOOST_CHECK(TestSplitHost("[www.diminutivevaultcoin.org]", "www.diminutivevaultcoin.org", -1));
-    BOOST_CHECK(TestSplitHost("www.diminutivevaultcoin.org:80", "www.diminutivevaultcoin.org", 80));
-    BOOST_CHECK(TestSplitHost("[www.diminutivevaultcoin.org]:80", "www.diminutivevaultcoin.org", 80));
+    BOOST_CHECK(TestSplitHost("diminutivecoin.com", "diminutivecoin.com", -1));
+    BOOST_CHECK(TestSplitHost("[diminutivecoin.com]", "diminutivecoin.com", -1));
+    BOOST_CHECK(TestSplitHost("diminutivecoin.com:80", "diminutivecoin.com", 80));
+    BOOST_CHECK(TestSplitHost("[diminutivecoin.com]:80", "diminutivecoin.com", 80));
     BOOST_CHECK(TestSplitHost("127.0.0.1", "127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("127.0.0.1:8333", "127.0.0.1", 8333));
+    BOOST_CHECK(TestSplitHost("127.0.0.1:49139", "127.0.0.1", 49139));
     BOOST_CHECK(TestSplitHost("[127.0.0.1]", "127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("[127.0.0.1]:8333", "127.0.0.1", 8333));
+    BOOST_CHECK(TestSplitHost("[127.0.0.1]:49139", "127.0.0.1", 49139));
     BOOST_CHECK(TestSplitHost("::ffff:127.0.0.1", "::ffff:127.0.0.1", -1));
-    BOOST_CHECK(TestSplitHost("[::ffff:127.0.0.1]:8333", "::ffff:127.0.0.1", 8333));
-    BOOST_CHECK(TestSplitHost("[::]:8333", "::", 8333));
-    BOOST_CHECK(TestSplitHost("::8333", "::8333", -1));
-    BOOST_CHECK(TestSplitHost(":8333", "", 8333));
-    BOOST_CHECK(TestSplitHost("[]:8333", "", 8333));
+    BOOST_CHECK(TestSplitHost("[::ffff:127.0.0.1]:49139", "::ffff:127.0.0.1", 49139));
+    BOOST_CHECK(TestSplitHost("[::]:49139", "::", 49139));
+    BOOST_CHECK(TestSplitHost("::49139", "::49139", -1));
+    BOOST_CHECK(TestSplitHost(":49139", "", 49139));
+    BOOST_CHECK(TestSplitHost("[]:49139", "", 49139));
     BOOST_CHECK(TestSplitHost("", "", -1));
 }
 
@@ -80,10 +80,10 @@ bool static TestParse(string src, string canon)
 BOOST_AUTO_TEST_CASE(netbase_lookupnumeric)
 {
     BOOST_CHECK(TestParse("127.0.0.1", "127.0.0.1:65535"));
-    BOOST_CHECK(TestParse("127.0.0.1:8333", "127.0.0.1:8333"));
+    BOOST_CHECK(TestParse("127.0.0.1:49139", "127.0.0.1:49139"));
     BOOST_CHECK(TestParse("::ffff:127.0.0.1", "127.0.0.1:65535"));
     BOOST_CHECK(TestParse("::", "[::]:65535"));
-    BOOST_CHECK(TestParse("[::]:8333", "[::]:8333"));
+    BOOST_CHECK(TestParse("[::]:49139", "[::]:49139"));
     BOOST_CHECK(TestParse("[127.0.0.1]", "127.0.0.1:65535"));
     BOOST_CHECK(TestParse(":::", ""));
 }

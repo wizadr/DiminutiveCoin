@@ -59,7 +59,7 @@
           </widget>
          </item>
          <item>
-          <widget class="DiminutiveVaultCoinAmountField" name="transactionFee"/>
+          <widget class="DiminutiveCoinAmountField" name="transactionFee"/>
          </item>
          <item>
           <spacer name="horizontalSpacerFee">
@@ -105,7 +105,7 @@
           </widget>
          </item>
          <item>
-          <widget class="DiminutiveVaultCoinAmountField" name="reserveBalance"/>
+          <widget class="DiminutiveCoinAmountField" name="reserveBalance"/>
          </item>
          <item>
           <spacer name="horizontalSpacerReserveBalance">
@@ -123,12 +123,12 @@
         </layout>
        </item>
        <item>
-        <widget class="QCheckBox" name="diminutivevaultcoinAtStartup">
+        <widget class="QCheckBox" name="diminutivecoinAtStartup">
          <property name="toolTip">
-          <string>Automatically start DiminutiveVaultCoin after logging in to the system.</string>
+          <string>Automatically start DiminutiveCoin after logging in to the system.</string>
          </property>
          <property name="text">
-          <string>&amp;Start DiminutiveVaultCoin on system login</string>
+          <string>&amp;Start DiminutiveCoin on system login</string>
          </property>
         </widget>
        </item>
@@ -153,19 +153,9 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_Network">
        <item>
-        <widget class="QCheckBox" name="mapPortUpnp">
-         <property name="toolTip">
-          <string>Automatically open the DiminutiveVaultCoin client port on the router. This only works when your router supports UPnP and it is enabled.</string>
-         </property>
-         <property name="text">
-          <string>Map port using &amp;UPnP</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QCheckBox" name="connectSocks">
          <property name="toolTip">
-          <string>Connect to the DiminutiveVaultCoin network through a SOCKS5 proxy (e.g. when connecting through Tor).</string>
+          <string>Connect to the DiminutiveCoin network through a SOCKS5 proxy (e.g. when connecting through Tor).</string>
          </property>
          <property name="text">
           <string>&amp;Connect through SOCKS5 proxy:</string>
@@ -319,7 +309,7 @@
          <item>
           <widget class="QValueComboBox" name="lang">
            <property name="toolTip">
-            <string>The user interface language can be set here. This setting will take effect after restarting DiminutiveVaultCoin.</string>
+            <string>The user interface language can be set here. This setting will take effect after restarting DiminutiveCoin.</string>
            </property>
           </widget>
          </item>
@@ -463,9 +453,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>DiminutiveVaultCoinAmountField</class>
+   <class>DiminutiveCoinAmountField</class>
    <extends>QSpinBox</extends>
-   <header>diminutivevaultcoinamountfield.h</header>
+   <header>diminutivecoinamountfield.h</header>
   </customwidget>
   <customwidget>
    <class>QValueComboBox</class>

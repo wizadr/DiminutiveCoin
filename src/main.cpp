@@ -21,7 +21,7 @@ using namespace std;
 using namespace boost;
 
 #if defined(NDEBUG)
-# error "DiminutiveVaultCoin cannot be compiled without assertions."
+# error "DiminutiveCoin cannot be compiled without assertions."
 #endif
 
 //
@@ -74,7 +74,7 @@ map<uint256, set<uint256> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "DiminutiveVaultCoin Signed Message:\n";
+const string strMessageMagic = "DiminutiveCoin Signed Message:\n";
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -953,7 +953,7 @@ void static PruneOrphanBlocks()
 // miner's coin base reward
 int64_t GetProofOfWorkReward(int64_t nFees, int nHeight)
 {
-    int64_t nSubsidy = 0 * COIN; //DimiVaultProtocol rewards 0.01 DIMI curve up and down to 0.04 DIMI
+    int64_t nSubsidy = 0 * COIN; //DiminutiveCoin Protocol rewards 0.01 DIMI curve up and down to 0.04 DIMI
 
     if(nHeight == 3)
     {
@@ -989,7 +989,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees, int nHeight)
 {
     int64_t nSubsidy= 0 * COIN;
     
-    if(IsVaultPOS(nHeight)) //Even blocks rewards 0.01 DIMI curve up and down 0.00001 DIMI 
+    if(IsWavePOS(nHeight)) //Even blocks rewards 0.01 DIMI curve up and down 0.00001 DIMI 
    
 {
     	if(nHeight % 2)
@@ -1023,7 +1023,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees, int nHeight)
 }
 
 //         
-//    DImInUtiVeVaUlT POW / POS  Vaulting Protocol 
+//    Diminutive Wave POW / POS  Protocol 
 //        Peak POW     Next Peak POW
 //         #            #
 //        # #          # #
@@ -1319,7 +1319,7 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs, map<uint256, CTx
 {
     // Take over previous transactions' spent pointers
     // fBlock is true when this is called from AcceptBlock when a new best-block is added to the blockchain
-    // fMiner is true when called from the internal diminutivevaultcoin miner
+    // fMiner is true when called from the internal diminutivecoin miner
     // ... both are false when called from CTransaction::AcceptToMemoryPool
     if (!IsCoinBase())
     {
@@ -2670,7 +2670,7 @@ struct CImportingNow
 
 void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
 {
-    RenameThread("diminutivevaultcoin-loadblk");
+    RenameThread("diminutivecoin-loadblk");
 
     CImportingNow imp;
 

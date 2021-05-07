@@ -2,7 +2,6 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-USE_UPNP:=0
 USE_WALLET:=1
 
 BOOST_SUFFIX?=-mgw49-mt-s-1_52
@@ -36,16 +35,6 @@ LDFLAGS=-Wl,--dynamicbase -Wl,--nxcompat -Wl,--large-address-aware -static
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
 
-ifndef USE_UPNP
-	override USE_UPNP = -
-endif
-ifneq (${USE_UPNP}, -)
- INCLUDEPATHS += -I"C:\miniupnpc-1.6-mgw"
- LIBPATHS += -L"C:\miniupnpc-1.6-mgw"
- LIBS += -l miniupnpc -l iphlpapi
- DEFS += -DSTATICLIB -DUSE_UPNP=$(USE_UPNP)
-endif
-
 LIBS += -l kernel32 -l user32 -l gdi32 -l comdlg32 -l winspool -l winmm -l shell32 -l comctl32 -l ole32 -l oleaut32 -l uuid -l rpcrt4 -l advapi32 -l ws2_32 -l mswsock -l shlwapi
 
 # TODO: make the mingw builds smarter about dependencies, like the linux/osx builds are
@@ -59,7 +48,7 @@ OBJS= \
     obj/crypter.o \
     obj/key.o \
     obj/init.o \
-    obj/diminutivevaultcoind.o \
+    obj/diminutivecoind.o \
     obj/keystore.o \
     obj/core.o \
     obj/main.o \
@@ -84,25 +73,24 @@ OBJS= \
     obj/scrypt.o \
     obj/scrypt-x86.o \
     obj/scrypt-x86_64.o \
-    obj/chainparams.o \
-    obj/blake.o\
-    obj/bmw.o\
-    obj/groestl.o\
-    obj/jh.o\
-    obj/keccak.o\
-    obj/skein.o\
-    obj/cubehash.o \
-    obj/luffa.o \
-    obj/aes_helper.o \
-    obj/echo.o \
-    obj/shavite.o \
-    obj/simd.o \
-    obj/hamsi.o \
-    obj/fugue.o \
-    obj/shabal.o \
-    obj/whirlpool.o \
-    obj/haval.o \
-    obj/sha2big.o
+    obj/crypto/blake.o\
+    obj/crypto/bmw.o\
+    obj/crypto/groestl.o\
+    obj/crypto/jh.o\
+    obj/crypto/keccak.o\
+    obj/crypto/skein.o\
+    obj/crypto/cubehash.o \
+    obj/crypto/luffa.o \
+    obj/crypto/aes_helper.o \
+    obj/crypto/echo.o \
+    obj/crypto/shavite.o \
+    obj/crypto/simd.o \
+    obj/crypto/hamsi.o \
+    obj/crypto/fugue.o \
+    obj/crypto/shabal.o \
+    obj/crypto/whirlpool.o \
+    obj/crypto/haval.o \
+    obj/crypto/sha2big.o
 
 ifeq (${USE_WALLET}, 1)
     DEFS += -DENABLE_WALLET
@@ -116,7 +104,7 @@ ifeq (${USE_WALLET}, 1)
         obj/walletdb.o
 endif
 
-all: diminutivevaultcoind.exe
+all: diminutivecoind.exe
 
 LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
 DEFS += $(addprefix -I,$(CURDIR)/leveldb/include)
@@ -135,11 +123,11 @@ obj/scrypt-x86.o: scrypt-x86.S
 obj/scrypt-x86_64.o: scrypt-x86_64.S
 	$(CXX) -c $(xCXXFLAGS) -MMD -o $@ $<
 
-diminutivevaultcoind.exe: $(OBJS:obj/%=obj/%)
+diminutivecoind.exe: $(OBJS:obj/%=obj/%)
 	g++ $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)
 
 clean:
-	-del /Q diminutivevaultcoind
+	-del /Q diminutivecoind
 	-del /Q obj\*
 
 FORCE:

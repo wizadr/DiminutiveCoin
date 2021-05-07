@@ -12,8 +12,8 @@
 // - E-mail usually won't line-break if there's no punctuation to break at.
 // - Double-clicking selects the whole number as one word if it's all alphanumeric.
 //
-#ifndef DIMINUTIVEVAULT_BASE58_H
-#define DIMINUTIVEVAULT_BASE58_H
+#ifndef DIMINUTIVECOIN_BASE58_H
+#define DIMINUTIVECOIN_BASE58_H
 
 #include <string>
 #include <vector>
@@ -257,19 +257,19 @@ public:
  * Script-hash-addresses have version 85 (or 196 testnet).
  * The data vector contains RIPEMD160(SHA256(cscript)), where cscript is the serialized redemption script.
  */
-class CDiminutiveVaultCoinAddress;
-class CDiminutiveVaultCoinAddressVisitor : public boost::static_visitor<bool>
+class CDiminutiveCoinAddress;
+class CDiminutiveCoinAddressVisitor : public boost::static_visitor<bool>
 {
 private:
-    CDiminutiveVaultCoinAddress *addr;
+    CDiminutiveCoinAddress *addr;
 public:
-    CDiminutiveVaultCoinAddressVisitor(CDiminutiveVaultCoinAddress *addrIn) : addr(addrIn) { }
+    CDiminutiveCoinAddressVisitor(CDiminutiveCoinAddress *addrIn) : addr(addrIn) { }
     bool operator()(const CKeyID &id) const;
     bool operator()(const CScriptID &id) const;
     bool operator()(const CNoDestination &no) const;
 };
 
-class CDiminutiveVaultCoinAddress : public CBase58Data
+class CDiminutiveCoinAddress : public CBase58Data
 {
 public:
     bool Set(const CKeyID &id) {
@@ -284,7 +284,7 @@ public:
 
     bool Set(const CTxDestination &dest)
     {
-        return boost::apply_visitor(CDiminutiveVaultCoinAddressVisitor(this), dest);
+        return boost::apply_visitor(CDiminutiveCoinAddressVisitor(this), dest);
     }
 
     bool IsValid() const
@@ -295,21 +295,21 @@ public:
         return fCorrectSize && fKnownVersion;
     }
 
-    CDiminutiveVaultCoinAddress()
+    CDiminutiveCoinAddress()
     {
     }
 
-    CDiminutiveVaultCoinAddress(const CTxDestination &dest)
+    CDiminutiveCoinAddress(const CTxDestination &dest)
     {
         Set(dest);
     }
 
-    CDiminutiveVaultCoinAddress(const std::string& strAddress)
+    CDiminutiveCoinAddress(const std::string& strAddress)
     {
         SetString(strAddress);
     }
 
-    CDiminutiveVaultCoinAddress(const char* pszAddress)
+    CDiminutiveCoinAddress(const char* pszAddress)
     {
         SetString(pszAddress);
     }
@@ -341,12 +341,12 @@ public:
     }
 };
 
-bool inline CDiminutiveVaultCoinAddressVisitor::operator()(const CKeyID &id) const         { return addr->Set(id); }
-bool inline CDiminutiveVaultCoinAddressVisitor::operator()(const CScriptID &id) const      { return addr->Set(id); }
-bool inline CDiminutiveVaultCoinAddressVisitor::operator()(const CNoDestination &id) const { return false; }
+bool inline CDiminutiveCoinAddressVisitor::operator()(const CKeyID &id) const         { return addr->Set(id); }
+bool inline CDiminutiveCoinAddressVisitor::operator()(const CScriptID &id) const      { return addr->Set(id); }
+bool inline CDiminutiveCoinAddressVisitor::operator()(const CNoDestination &id) const { return false; }
 
 /** A base58-encoded secret key */
-class CDiminutiveVaultCoinSecret : public CBase58Data
+class CDiminutiveCoinSecret : public CBase58Data
 {
 public:
     void SetKey(const CKey& vchSecret)
@@ -381,18 +381,18 @@ public:
         return SetString(strSecret.c_str());
     }
 
-    CDiminutiveVaultCoinSecret(const CKey& vchSecret)
+    CDiminutiveCoinSecret(const CKey& vchSecret)
     {
         SetKey(vchSecret);
     }
 
-    CDiminutiveVaultCoinSecret()
+    CDiminutiveCoinSecret()
     {
     }
 };
 
 
-template<typename K, int Size, CChainParams::Base58Type Type> class CDiminutiveVaultCoinExtKeyBase : public CBase58Data
+template<typename K, int Size, CChainParams::Base58Type Type> class CDiminutiveCoinExtKeyBase : public CBase58Data
 {
 public:
     void SetKey(const K &key) {
@@ -407,14 +407,14 @@ public:
         return ret;
     }
 
-    CDiminutiveVaultCoinExtKeyBase(const K &key) {
+    CDiminutiveCoinExtKeyBase(const K &key) {
         SetKey(key);
     }
 
-    CDiminutiveVaultCoinExtKeyBase() {}
+    CDiminutiveCoinExtKeyBase() {}
 };
 
-typedef CDiminutiveVaultCoinExtKeyBase<CExtKey, 74, CChainParams::EXT_SECRET_KEY> CDiminutiveVaultCoinExtKey;
-typedef CDiminutiveVaultCoinExtKeyBase<CExtPubKey, 74, CChainParams::EXT_PUBLIC_KEY> CDiminutiveVaultCoinExtPubKey;
+typedef CDiminutiveCoinExtKeyBase<CExtKey, 74, CChainParams::EXT_SECRET_KEY> CDiminutiveCoinExtKey;
+typedef CDiminutiveCoinExtKeyBase<CExtPubKey, 74, CChainParams::EXT_PUBLIC_KEY> CDiminutiveCoinExtPubKey;
 
-#endif // DIMINUTIVEVAULT_BASE58_H
+#endif // DIMINUTIVECOIN_BASE58_H

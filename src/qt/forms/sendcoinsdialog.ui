@@ -729,7 +729,7 @@
         <string>S&amp;end</string>
        </property>
        <property name="icon">
-        <iconset resource="../diminutivevaultcoin.qrc">
+        <iconset resource="../diminutivecoin.qrc">
          <normaloff>:/icons/send</normaloff>:/icons/send</iconset>
        </property>
        <property name="default">
@@ -742,7 +742,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../diminutivevaultcoin.qrc"/>
+  <include location="../diminutivecoin.qrc"/>
  </resources>
  <connections/>
 </ui>

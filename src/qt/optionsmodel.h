@@ -5,7 +5,7 @@
 
 extern bool fUseBlackTheme;
 
-/** Interface from Qt to configuration data structure for DiminutiveVaultCoin client.
+/** Interface from Qt to configuration data structure for DiminutiveCoin client.
    To Qt, the options are presented as a list with the different options
    laid out vertically.
    This can be changed to a tree once the settings become sufficiently
@@ -21,14 +21,13 @@ public:
     enum OptionID {
         StartAtStartup,    // bool
         MinimizeToTray,    // bool
-        MapPortUPnP,       // bool
         MinimizeOnClose,   // bool
         ProxyUse,          // bool
         ProxyIP,           // QString
         ProxyPort,         // int
         Fee,               // qint64
         ReserveBalance,    // qint64
-        DisplayUnit,       // DiminutiveVaultCoinUnits::Unit
+        DisplayUnit,       // DiminuCoinUnits::Unit
         Language,          // QString
         CoinControlFeatures, // bool
         UseBlackTheme,     // bool

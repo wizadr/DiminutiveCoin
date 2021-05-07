@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef _DIMINUTIVEVAULTRPC_PROTOCOL_H_
-#define _DIMINUTIVEVAULTRPC_PROTOCOL_H_ 1
+#ifndef _DIMINUTIVECOINRPC_PROTOCOL_H_
+#define _DIMINUTIVECOINRPC_PROTOCOL_H_ 1
 
 #include "compat.h"
 
@@ -33,7 +33,7 @@ enum HTTPStatusCode
     HTTP_INTERNAL_SERVER_ERROR = 500,
 };
 
-// DiminutiveVaultCoin RPC error codes
+// DiminutiveCoin RPC error codes
 enum RPCErrorCode
 {
     // Standard JSON-RPC 2.0 errors
@@ -55,13 +55,13 @@ enum RPCErrorCode
     RPC_SERVER_NOT_STARTED          = -18, // RPC server was not started (StartRPCThreads() not called)
 
     // P2P client errors
-    RPC_CLIENT_NOT_CONNECTED        = -9,  // DiminutiveVaultCoin is not connected
+    RPC_CLIENT_NOT_CONNECTED        = -9,  // DiminutiveCoin is not connected
     RPC_CLIENT_IN_INITIAL_DOWNLOAD  = -10, // Still downloading initial blocks
     RPC_CLIENT_NODE_ALREADY_ADDED   = -23, // Node is already added
     RPC_CLIENT_NODE_NOT_ADDED       = -24, // Node has not been added before
 
     // Wallet errors
-    RPC_WALLET_ERROR                = -4,  // Unspecified problem with wallet (key not found etc.)
+    RPC_WALLET_ERROR                = -4,  // Unspecified problem with wallet (key is not found etc.)
     RPC_WALLET_INSUFFICIENT_FUNDS   = -6,  // Not enough funds in wallet or account
     RPC_WALLET_INVALID_ACCOUNT_NAME = -11, // Invalid account name
     RPC_WALLET_KEYPOOL_RAN_OUT      = -12, // Keypool ran out, call keypoolrefill first

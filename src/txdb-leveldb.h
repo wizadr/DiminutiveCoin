@@ -3,8 +3,8 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef DIMINUTIVEVAULT_LEVELDB_H
-#define DIMINUTIVEVAULT_LEVELDB_H
+#ifndef DIMINUTIVECOIN_LEVELDB_H
+#define DIMINUTIVECOIN_LEVELDB_H
 
 #include "main.h"
 
@@ -203,4 +203,4 @@ private:
 };
 
 
-#endif // DIMINUTIVEVAULT_DB_H
+#endif // DIMINUTIVECOIN_DB_H

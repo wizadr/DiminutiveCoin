@@ -6,7 +6,7 @@ they can be picked up by Qt linguist.
 from subprocess import Popen, PIPE
 import glob
 
-OUT_CPP="src/qt/diminutivevaultcoinstrings.cpp"
+OUT_CPP="src/qt/diminutivecoinstrings.cpp"
 EMPTY=['""']
 
 def parse_po(text):
@@ -62,9 +62,9 @@ f.write("""#include <QtGlobal>
 #define UNUSED
 #endif
 """)
-f.write('static const char UNUSED *diminutivevaultcoin_strings[] = {')
+f.write('static const char UNUSED *diminutivecoin_strings[] = {')
 for (msgid, msgstr) in messages:
     if msgid != EMPTY:
-        f.write('QT_TRANSLATE_NOOP("diminutivevaultcoin-core", %s),\n' % ('\n'.join(msgid)))
+        f.write('QT_TRANSLATE_NOOP("diminutivecoin-core", %s),\n' % ('\n'.join(msgid)))
 f.write('};')
 f.close()

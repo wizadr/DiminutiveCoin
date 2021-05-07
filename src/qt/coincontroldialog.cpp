@@ -3,7 +3,7 @@
 
 #include "init.h"
 #include "base58.h"
-#include "diminutivevaultcoinunits.h"
+#include "diminutivecoinunits.h"
 #include "walletmodel.h"
 #include "addresstablemodel.h"
 #include "optionsmodel.h"
@@ -466,7 +466,7 @@ void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)
     }
     
     // actually update labels
-    int nDisplayUnit = DiminutiveVaultCoinUnits::DIMI;
+    int nDisplayUnit = DiminutiveCoinUnits::DIMI;
     if (model && model->getOptionsModel())
         nDisplayUnit = model->getOptionsModel()->getDisplayUnit();
             
@@ -485,23 +485,23 @@ void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)
     dialog->findChild<QLabel *>("labelCoinControlChange")       ->setEnabled(nPayAmount > 0);
     
     // stats
-    l1->setText(QString::number(nQuantity));                                 // Quantity        
-    l2->setText(DiminutiveVaultCoinUnits::formatWithUnit(nDisplayUnit, nAmount));        // Amount
-    l3->setText(DiminutiveVaultCoinUnits::formatWithUnit(nDisplayUnit, nPayFee));        // Fee
-    l4->setText(DiminutiveVaultCoinUnits::formatWithUnit(nDisplayUnit, nAfterFee));      // After Fee
-    l5->setText(((nBytes > 0) ? "~" : "") + QString::number(nBytes));                                    // Bytes
-    l7->setText((fLowOutput ? (fDust ? tr("DUST") : tr("yes")) : tr("no"))); // Low Output / Dust
-    l8->setText(DiminutiveVaultCoinUnits::formatWithUnit(nDisplayUnit, nChange));        // Change
+    l1->setText(QString::number(nQuantity));                                        // Quantity        
+    l2->setText(DiminutiveCoinUnits::formatWithUnit(nDisplayUnit, nAmount));        // Amount
+    l3->setText(DiminutiveCoinUnits::formatWithUnit(nDisplayUnit, nPayFee));        // Fee
+    l4->setText(DiminutiveCoinUnits::formatWithUnit(nDisplayUnit, nAfterFee));      // After Fee
+    l5->setText(((nBytes > 0) ? "~" : "") + QString::number(nBytes));               // Bytes
+    l7->setText((fLowOutput ? (fDust ? tr("DUST") : tr("yes")) : tr("no")));        // Low Output / Dust
+    l8->setText(DiminutiveCoinUnits::formatWithUnit(nDisplayUnit, nChange));        // Change
     
     // turn labels "red"
-    l5->setStyleSheet((nBytes >= 10000) ? "color:red;" : "");               // Bytes >= 10000
-    l7->setStyleSheet((fLowOutput) ? "color:red;" : "");                    // Low Output = "yes"
-    l8->setStyleSheet((nChange > 0 && nChange < CENT) ? "color:red;" : ""); // Change < 0.01DIMI
+    l5->setStyleSheet((nBytes >= 10000) ? "color:red;" : "");                       // Bytes >= 10000
+    l7->setStyleSheet((fLowOutput) ? "color:red;" : "");                            // Low Output = "yes"
+    l8->setStyleSheet((nChange > 0 && nChange < CENT) ? "color:red;" : "");         // Change < 0.01DIMI
         
     // tool tips
-    l5->setToolTip(tr("This label turns red, if the transaction size is bigger than 10000 bytes.\n\n This means a fee of at least %1 per kb is required.\n\n Can vary +/- 1 Byte per input.").arg(DiminutiveVaultCoinUnits::formatWithUnit(nDisplayUnit, CENT)));
-    l7->setToolTip(tr("This label turns red, if any recipient receives an amount smaller than %1.\n\n This means a fee of at least %2 is required. \n\n Amounts below 0.546 times the minimum relay fee are shown as DUST.").arg(DiminutiveVaultCoinUnits::formatWithUnit(nDisplayUnit, CENT)).arg(DiminutiveVaultCoinUnits::formatWithUnit(nDisplayUnit, CENT)));
-    l8->setToolTip(tr("This label turns red, if the change is smaller than %1.\n\n This means a fee of at least %2 is required.").arg(DiminutiveVaultCoinUnits::formatWithUnit(nDisplayUnit, CENT)).arg(DiminutiveVaultCoinUnits::formatWithUnit(nDisplayUnit, CENT)));
+    l5->setToolTip(tr("This label turns red, if the transaction size is bigger than 10000 bytes.\n\n This means a fee of at least %1 per kb is required.\n\n Can vary +/- 1 Byte per input.").arg(DiminutiveCoinUnits::formatWithUnit(nDisplayUnit, CENT)));
+    l7->setToolTip(tr("This label turns red, if any recipient receives an amount smaller than %1.\n\n This means a fee of at least %2 is required. \n\n Amounts below 0.546 times the minimum relay fee are shown as DUST.").arg(DiminutiveCoinUnits::formatWithUnit(nDisplayUnit, CENT)).arg(DiminutiveCoinUnits::formatWithUnit(nDisplayUnit, CENT)));
+    l8->setToolTip(tr("This label turns red, if the change is smaller than %1.\n\n This means a fee of at least %2 is required.").arg(DiminutiveCoinUnits::formatWithUnit(nDisplayUnit, CENT)).arg(DiminutiveCoinUnits::formatWithUnit(nDisplayUnit, CENT)));
     dialog->findChild<QLabel *>("labelCoinControlBytesText")    ->setToolTip(l5->toolTip());
     dialog->findChild<QLabel *>("labelCoinControlLowOutputText")->setToolTip(l7->toolTip());
     dialog->findChild<QLabel *>("labelCoinControlChangeText")   ->setToolTip(l8->toolTip());
@@ -521,7 +521,7 @@ void CoinControlDialog::updateView()
     QFlags<Qt::ItemFlag> flgCheckbox=Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable;
     QFlags<Qt::ItemFlag> flgTristate=Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsUserCheckable | Qt::ItemIsTristate;    
     
-    int nDisplayUnit = DiminutiveVaultCoinUnits::DIMI;
+    int nDisplayUnit = DiminutiveCoinUnits::DIMI;
     if (model && model->getOptionsModel())
         nDisplayUnit = model->getOptionsModel()->getDisplayUnit();
         
@@ -574,9 +574,9 @@ void CoinControlDialog::updateView()
             QString sAddress = "";
             if(ExtractDestination(out.tx->vout[out.i].scriptPubKey, outputAddress))
             {
-                sAddress = CDiminutiveVaultCoinAddress(outputAddress).ToString().c_str();
+                sAddress = CDiminutiveCoinAddress(outputAddress).ToString().c_str();
                 
-                // if listMode or change => show diminutivevaultcoin address. In tree mode, address is not shown again for direct wallet address outputs
+                // if listMode or change => show diminutivecoin address. In tree mode, address is not shown again for direct wallet address outputs
                 if (!treeMode || (!(sAddress == sWalletAddress)))
                     itemOutput->setText(COLUMN_ADDRESS, sAddress);
             }
@@ -599,7 +599,7 @@ void CoinControlDialog::updateView()
             }
 
             // amount
-            itemOutput->setText(COLUMN_AMOUNT, DiminutiveVaultCoinUnits::format(nDisplayUnit, out.tx->vout[out.i].nValue));
+            itemOutput->setText(COLUMN_AMOUNT, DiminutiveCoinUnits::format(nDisplayUnit, out.tx->vout[out.i].nValue));
             itemOutput->setText(COLUMN_AMOUNT_INT64, strPad(QString::number(out.tx->vout[out.i].nValue), 15, " ")); // padding so that sorting works correctly
 
             // date
@@ -633,7 +633,7 @@ void CoinControlDialog::updateView()
         if (treeMode)
         {
             itemWalletAddress->setText(COLUMN_CHECKBOX, "(" + QString::number(nChildren) + ")");
-            itemWalletAddress->setText(COLUMN_AMOUNT, DiminutiveVaultCoinUnits::format(nDisplayUnit, nSum));
+            itemWalletAddress->setText(COLUMN_AMOUNT, DiminutiveCoinUnits::format(nDisplayUnit, nSum));
             itemWalletAddress->setText(COLUMN_AMOUNT_INT64, strPad(QString::number(nSum), 15, " "));
         }
     }
