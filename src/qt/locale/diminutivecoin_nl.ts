@@ -27,7 +27,7 @@ This is experimental software.
 
 Distributed under the MIT/X11 software license, see the accompanying file COPYING or &lt;a href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;http://www.opensource.org/licenses/mit-license.php&lt;/a&gt;.
 
-This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;).</source>
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;) and UPnP software written by Thomas Bernard.</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -1161,6 +1161,16 @@ Dit betekend dat een fee van %2 is vereist.</translation>
         <location line="+21"/>
         <source>&amp;Network</source>
         <translation>&amp;Netwerk</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Automatically open the Diminutive client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>De Diminutive client poort automatisch openen op de router. Dit werkt alleen wanneer uw router UPnP ondersteunt en deze is ingeschakeld.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Map port using &amp;UPnP</source>
+        <translation>Portmapping via &amp;UPnP</translation>
     </message>
     <message>
         <location line="+19"/>
@@ -2912,6 +2922,16 @@ for example: alertnotify=echo %%s | mail -s &quot;DiminutiveCoin Alert&quot; adm
         <location line="-41"/>
         <source>Specify connection timeout in milliseconds (default: 5000)</source>
         <translation>Specificeer de time-outtijd in milliseconden (standaard: 5000)</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Use UPnP to map the listening port (default: 0)</source>
+        <translation>Gebruik UPnP om de luisterende poort te mappen (standaard: 0)</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
+        <translation>Gebruik UPnP om de luisterende poort te mappen (standaard: 1 als er wordt geluisterd)</translation>
     </message>
     <message>
         <location line="-25"/>

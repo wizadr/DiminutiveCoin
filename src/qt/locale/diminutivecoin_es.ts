@@ -27,7 +27,7 @@ This is experimental software.
 
 Distributed under the MIT/X11 software license, see the accompanying file COPYING or &lt;a href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;http://www.opensource.org/licenses/mit-license.php&lt;/a&gt;.
 
-This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;).</source>
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;) and UPnP software written by Thomas Bernard.</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -1161,6 +1161,16 @@ Esto significa que se requiere una cuota de al menos %2.</translation>
         <location line="+21"/>
         <source>&amp;Network</source>
         <translation>&amp;Red</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Automatically open the Diminutive client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir automáticamente el puerto de cliente Diminutive en el router. Esto sólo funciona cuando el router es compatible con UPnP y está habilitado.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Map port using &amp;UPnP</source>
+        <translation>Mapear el puerto usando &amp;UPnP</translation>
     </message>
     <message>
         <location line="+19"/>
@@ -2918,6 +2928,16 @@ for example: alertnotify=echo %%s | mail -s &quot;DiminutiveCoin Alert&quot; adm
         <location line="-41"/>
         <source>Specify connection timeout in milliseconds (default: 5000)</source>
         <translation>Especificar el tiempo máximo de conexión en milisegundos (predeterminado: 5000)</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Use UPnP to map the listening port (default: 0)</source>
+        <translation>Usar UPnP para asignar el puerto de escucha (predeterminado: 0)</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
+        <translation>Usar UPnP para asignar el puerto de escucha (predeterminado: 1 al escuchar)</translation>
     </message>
     <message>
         <location line="-25"/>

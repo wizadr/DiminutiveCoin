@@ -5,7 +5,7 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 1.0.1.0
+!define VERSION 1.0.1.1
 !define COMPANY "DiminutiveCoin project"
 !define URL http://diminutivecoin.com/
 
@@ -45,13 +45,13 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile diminutivecoin-1.0.1.0-win32-setup.exe
+OutFile diminutivecoin-1.0.1.1-win32-setup.exe
 InstallDir $PROGRAMFILES\DiminutiveCoin
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 1.0.1.0
+VIProductVersion 1.0.1.1
 VIAddVersionKey ProductName DiminutiveCoin
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"

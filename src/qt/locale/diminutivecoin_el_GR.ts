@@ -25,7 +25,7 @@ This is experimental software.
 
 Distributed under the MIT/X11 software license, see the accompanying file COPYING or &lt;a href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;http://www.opensource.org/licenses/mit-license.php&lt;/a&gt;.
 
-This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;).</source>
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;). and UPnP software written by Thomas Bernard</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -1146,7 +1146,17 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <source>&amp;Network</source>
         <translation>&amp;Δίκτυο</translation>
     </message>
+	<message>
+        <location line="+6"/>
+        <source>Automatically open the Diminutive client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation type="unfinished"/>
+    </message>
     <message>
+        <location line="+3"/>
+        <source>Map port using &amp;UPnP</source>
+        <translation>Απόδοση θυρών με χρήστη &amp;UPnP</translation>
+    </message>
+	<message>
         <location line="+19"/>
         <source>Proxy &amp;IP:</source>
         <translation>&amp;IP διαμεσολαβητή:</translation>
@@ -2886,6 +2896,16 @@ for example: alertnotify=echo %%s | mail -s &quot;DiminutiveCoin Alert&quot; adm
         <location line="-1"/>
         <source>Set minimum block size in bytes (default: 0)</source>
         <translation>Ορίστε το μέγιστο μέγεθος μπλοκ σε bytes (προεπιλογή: 0)</translation>
+    </message>
+	<message>
+        <location line="+28"/>
+        <source>Use UPnP to map the listening port (default: 0)</source>
+        <translation>Χρησιμοποίηση του  UPnP για την χρήση της πόρτας αναμονής (προεπιλογή:0)</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
+        <translation>Χρησιμοποίηση του  UPnP για την χρήση της πόρτας αναμονής (προεπιλογή:1)</translation>
     </message>
     <message>
         <location line="-34"/>

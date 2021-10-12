@@ -8,22 +8,23 @@
 
 * tag version in git
 
-   git tag -a v1.0.1.0
+   git tag -a v1.0.1.1
 
 * write release notes.  git shortlog helps a lot:
 
-   git shortlog --no-merges v1.0.1.0..
+   git shortlog --no-merges v1.0.1.1..
 
 * perform gitian builds
 
   * From a directory containing the diminutivecoin source, gitian-builder and gitian.sigs
    export SIGNER=(your gitian key, ie bluematt, sipa, etc)
-   export VERSION=1.0.1.0
+   export VERSION=1.0.1.1
    cd ./gitian-builder
 
   * Fetch and build inputs:
    mkdir -p inputs; cd inputs/
-   wget 'http://www.openssl.org/source/openssl-1.0.1b.tar.gz'
+  wget 'http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.6.tar.gz' -O miniupnpc-1.6.tar.gz
+   wget 'http://www.openssl.org/source/openssl-1.0.1g.tar.gz'
    wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
    wget 'http://zlib.net/zlib-1.2.6.tar.gz'
    wget 'ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng-1.5.9.tar.gz'
@@ -74,11 +75,11 @@
   See this blog post for how Gavin set up his build environment to build the OSX
   release; note that a patched version of macdeployqt is not needed anymore, as
   the required functionality and fixes are implemented directly in macdeployqtplus:
-    http://gavintech.blogspot.com/2011/11/deploying-diminutivecoin-qt-on-osx.html
+    http://gavintech.blogspot.com/2011/11/deploying-bitcoin-qt-on-osx.html
   Gavin also had trouble with the macports py27-appscript package; he
   ended up installing a version that worked with: /usr/bin/easy_install-2.7 appscript
 
-  qmake RELEASE=1 USE_QRCODE=1 diminutivecoin-qt.pro
+  qmake RELEASE=1 USE_UPNP=1 USE_QRCODE=1 diminutivecoin-qt.pro
   make
   export QTDIR=/opt/local/share/qt4  # needed to find translations/qt_*.qm files
   T=$(contrib/qt_translations.py $QTDIR/translations src/qt/locale)
@@ -112,7 +113,7 @@
 * After 3 or more people have gitian-built, repackage gitian-signed zips:
 
   * From a directory containing diminutivecoin source, gitian.sigs and gitian zips
-   export VERSION=1.0.1.0
+   export VERSION=1.0.1.1
    mkdir diminutivecoin-${VERSION}-linux-gitian
    pushd diminutivecoin-${VERSION}-linux-gitian
    unzip ../diminutivecoin-${VERSION}-linux-gitian.zip

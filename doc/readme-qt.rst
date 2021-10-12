@@ -15,7 +15,7 @@ distribution are installed, for Debian and Ubuntu these are:
     apt-get install qt5-default qt5-qmake qtbase5-dev-tools qttools5-dev-tools \
         build-essential libboost-dev libboost-system-dev \
         libboost-filesystem-dev libboost-program-options-dev libboost-thread-dev \
-        libssl-dev libdb++-dev
+        libssl-dev libdb++-dev libminiupnpc-dev
 
 then execute the following:
 
@@ -61,7 +61,7 @@ Mac OS X
 ::
 
 	sudo port selfupdate
-	sudo port install boost db48
+	sudo port install boost db48 miniupnpc
 
 - Open the .pro file in Qt Creator and build as normal (cmd-B)
 
@@ -72,6 +72,29 @@ Mac OS X
 Build configuration options
 ============================
 
+UPNnP port forwarding
+---------------------
+
+To use UPnP for port forwarding behind a NAT router (recommended, as more connections overall allow for a faster and more stable diminutivecoin experience), pass the following argument to qmake:
+
+::
+
+    qmake "USE_UPNP=1"
+
+(in **Qt Creator**, you can find the setting for additional qmake arguments under "Projects" -> "Build Settings" -> "Build Steps", then click "Details" next to **qmake**)
+
+This requires miniupnpc for UPnP port mapping.  It can be downloaded from
+http://miniupnp.tuxfamily.org/files/.  UPnP support is not compiled in by default.
+
+Set USE_UPNP to a different value to control this:
+
++------------+--------------------------------------------------------------------------+
+| USE_UPNP=- | no UPnP support, miniupnpc not required;                                 |
++------------+--------------------------------------------------------------------------+
+| USE_UPNP=0 | (the default) built with UPnP, support turned off by default at runtime; |
++------------+--------------------------------------------------------------------------+
+| USE_UPNP=1 | build with UPnP support turned on by default at runtime.                 |
++------------+--------------------------------------------------------------------------+
 
 Notification support for recent (k)ubuntu versions
 ---------------------------------------------------

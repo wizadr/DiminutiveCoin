@@ -11,6 +11,7 @@ CXX:=/usr/bin/$(TARGET_PLATFORM)-w64-mingw32-g++
 RANLIB=/usr/bin/$(TARGET_PLATFORM)-w64-mingw32-ranlib
 STRIP=/usr/bin/$(TARGET_PLATFORM)-w64-mingw32-strip
 
+USE_UPNP:=0
 USE_WALLET:=1
 
 LIBPATHS= \
@@ -31,6 +32,14 @@ LIBS += \
 
 DEFS=-D_MT -DWIN32 -D_WINDOWS -DBOOST_THREAD_USE_LIB -DBOOST_SPIRIT_THREADSAFE
 DEBUGFLAGS=-g
+
+ifndef USE_UPNP
+	override USE_UPNP = -
+endif
+ifneq (${USE_UPNP}, -)
+	LIBPATHS += -L"$(DEPSDIR)/miniupnpc"
+	LIBS += -l miniupnpc -l iphlpapi
+	DEFS += -DMINIUPNP_STATICLIB -DSTATICLIB -DUSE_UPNP=$(USE_UPNP)
 
 ifeq (${ARCH}, i686)
     EXT_OPTIONS=-msse2

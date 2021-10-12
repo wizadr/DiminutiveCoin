@@ -37,7 +37,7 @@ const std::string CLIENT_NAME("DiminutiveCoin");
 // git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
 
 #ifdef GIT_ARCHIVE
-#    define GIT_COMMIT_ID "-Devaulted"
+#    define GIT_COMMIT_ID "-NetUp"
 #    define GIT_COMMIT_DATE "$Format:%cD$"
 #endif
 

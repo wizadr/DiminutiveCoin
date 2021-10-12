@@ -27,13 +27,13 @@ This is experimental software.
 
 Distributed under the MIT/X11 software license, see the accompanying file COPYING or &lt;a href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;http://www.opensource.org/licenses/mit-license.php&lt;/a&gt;.
 
-This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;).</source>
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) and cryptographic software written by Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;) and UPnP software written by Thomas Bernard.</source>
         <translation>
 Bu, deneysel bir yazılımdır.
 
 MIT/X11 yazılım lisansı kapsamında yayınlanmıştır, beraberindeki COPYING dosyasına veya &lt;a href=&quot;http://www.opensource.org/licenses/mit-license.php&quot;&gt;http://www.opensource.org/licenses/mit-license.php&lt;/a&gt; sayfasına bakınız.
 
-Bu ürün, OpenSSL projesi tarafından OpenSSL araç takımıThis product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) için geliştirilmiş yazılımı, Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;).</translation>
+Bu ürün, OpenSSL projesi tarafından OpenSSL araç takımıThis product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (&lt;a href=&quot;https://www.openssl.org/&quot;&gt;https://www.openssl.org/&lt;/a&gt;) için geliştirilmiş yazılımı, Eric Young (&lt;a href=&quot;mailto:eay@cryptsoft.com&quot;&gt;eay@cryptsoft.com&lt;/a&gt;) tarafından hazırlanmış şifreleme yazılımı ve Thomas Bernard tarafından yazılmış UPnP yazılımı içerir.</translation>
     </message>
 </context>
 <context>
@@ -1166,6 +1166,16 @@ This label turns red, if the priority is smaller than &quot;medium&quot;.
         <location line="+21"/>
         <source>&amp;Network</source>
         <translation>&amp;Şebeke</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Automatically open the Diminutive client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Yönelticide Diminutive istemci portunu otomatik olarak aç. Bu, sadece yönelticiniz UPnP&apos;i desteklediğinde ve etkin olduğunda çalışır.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Map port using &amp;UPnP</source>
+        <translation>Portları &amp;UPnP kuldiminutivevaultrak haritala</translation>
     </message>
     <message>
         <location line="+19"/>
@@ -2927,6 +2937,16 @@ Ayrıca sorunlardan haberdar edilmek için alertnotify parametresini doldurmanı
         <location line="-41"/>
         <source>Specify connection timeout in milliseconds (default: 5000)</source>
         <translation>Bağlantı zaman aşım süresini milisaniye olarak belirt (varsayılan: 5000)</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Use UPnP to map the listening port (default: 0)</source>
+        <translation>Dinlenecek portu haritalamak için UPnP kullan (varsayılan: 0)</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Use UPnP to map the listening port (default: 1 when listening)</source>
+        <translation>Dinlenecek portu haritalamak için UPnP kullan (varsayılan: dinlenildiğinde 1)</translation>
     </message>
     <message>
         <location line="-25"/>

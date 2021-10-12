@@ -4,6 +4,7 @@
 
 STRIP=strip
 
+USE_UPNP:=1
 USE_WALLET:=1
 
 LINK:=$(CXX)
@@ -33,6 +34,14 @@ LIBS += \
    -l db_cxx$(BDB_LIB_SUFFIX) \
    -l ssl \
    -l crypto
+
+ifndef USE_UPNP
+	override USE_UPNP = -
+endif
+ifneq (${USE_UPNP}, -)
+	LIBS += -l miniupnpc
+	DEFS += -DUSE_UPNP=$(USE_UPNP)
+endif
 
 LIBS+= \
  -Wl,-B$(LMODE2) \
